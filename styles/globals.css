@@ -47,9 +47,8 @@ body {
   z-index: -2;
 }
 
-/* ─── Hero content (полная ширина контейнера) ─────────────── */
+/* ─── Hero content ───────────────────────────────────────── */
 .hero-content {
-  width: 100%;
   padding-block: clamp(3rem, 8vh, 6rem);
   padding-bottom: clamp(3.5rem, 9vh, 7rem);
 }
@@ -153,10 +152,7 @@ body {
   padding: 0 1.5rem;
 }
 
-.hero-fact:first-child {
-  padding-left: 0;
-}
-
+/* первый и последний факт — без лишнего отступа наружу */
 .hero-fact:last-child {
   padding-right: 0;
 }
