@@ -1,0 +1,73 @@
+:root {
+  --duration-fast: 180ms;
+  --duration-standard: 280ms;
+  --duration-reveal: 520ms;
+  --ease-gentle: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-reveal) var(--ease-gentle),
+    transform var(--duration-reveal) var(--ease-gentle);
+}
+
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-soft-delay {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-reveal) var(--ease-gentle) 120ms,
+    transform var(--duration-reveal) var(--ease-gentle) 120ms;
+}
+
+.reveal-up.is-visible .reveal-soft-delay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.soft-lift,
+.btn,
+.text-link,
+.story-image {
+  transition: transform var(--duration-standard) var(--ease-gentle),
+    box-shadow var(--duration-standard) var(--ease-gentle),
+    background-color var(--duration-standard) ease-out,
+    color var(--duration-standard) ease-out,
+    border-color var(--duration-standard) ease-out;
+}
+
+.soft-lift:hover,
+.soft-lift:focus-within {
+  transform: translateY(-2px);
+}
+
+.story-image:hover {
+  transform: scale(1.02);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-1px);
+}
+
+.text-link:hover,
+.text-link:focus-visible {
+  text-decoration-thickness: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal-up,
+  .reveal-soft-delay {
+    opacity: 1;
+    transform: none;
+  }
+}
