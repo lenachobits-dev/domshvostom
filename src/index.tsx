@@ -65,6 +65,35 @@ app.get('/', (c) => {
         </ul>
       </div>
     </section>
+    <section id="about-section" class="about-block reveal-up">
+      <div class="about-inner shell">
+
+        <div class="about-text">
+          <p class="about-overline">О проекте</p>
+          <h2 class="about-heading">Не просто приют —<br>целая система помощи</h2>
+
+          <div class="about-body">
+            <p>«Дом с Хвостом» вырос из многолетней волонтёрской работы в системный проект помощи бездомным животным. Сегодня это не только спасение животного, но и реабилитация, социализация, ветеринарная помощь, уход, поиск дома и развитие инфраструктуры, которая позволяет помогать качественно и в долгую.</p>
+            <p>Мы верим, что животному недостаточно просто выжить. Ему нужны безопасность, восстановление, забота, адаптация и шанс снова поверить человеку. Именно поэтому мы строим не временное решение, а устойчивую модель помощи.</p>
+          </div>
+
+          <p class="about-accent">Люди. Животные. Добрые дела. Каждый день.</p>
+        </div>
+
+        <div class="about-visual reveal-soft-delay">
+          <figure class="about-figure">
+            <img
+              src="/static/about-bg.jpg"
+              alt="Фотографии животных и людей на верёвке — атмосфера праздника «Дом с Хвостом»"
+              class="about-img"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+
+      </div>
+    </section>
   </main>
 
   <script src="/static/app.js" defer></script>
