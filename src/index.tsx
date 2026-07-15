@@ -118,6 +118,9 @@ app.get('/', (c) => {
         <ul class="directions-track" id="dir-track">
 
           <li class="dir-card">
+            <button class="dir-card__toggle" aria-label="Раскрыть описание" aria-expanded="false">
+              <span class="dir-card__toggle-icon" aria-hidden="true"></span>
+            </button>
             <div class="dir-card__media">
               <img src="/static/dir-1.jpg" alt="Волонтёр с собакой у деревянного домика"
                 class="dir-card__img" loading="lazy" decoding="async"
@@ -132,6 +135,9 @@ app.get('/', (c) => {
           </li>
 
           <li class="dir-card">
+            <button class="dir-card__toggle" aria-label="Раскрыть описание" aria-expanded="false">
+              <span class="dir-card__toggle-icon" aria-hidden="true"></span>
+            </button>
             <div class="dir-card__media">
               <img src="/static/dir-2.jpg" alt="Девушка играет с радостной собакой в саду"
                 class="dir-card__img" loading="lazy" decoding="async"
@@ -146,6 +152,9 @@ app.get('/', (c) => {
           </li>
 
           <li class="dir-card">
+            <button class="dir-card__toggle" aria-label="Раскрыть описание" aria-expanded="false">
+              <span class="dir-card__toggle-icon" aria-hidden="true"></span>
+            </button>
             <div class="dir-card__media">
               <img src="/static/dir-3.jpg" alt="Человек с табличкой и собака на поводке"
                 class="dir-card__img" loading="lazy" decoding="async"
@@ -160,6 +169,9 @@ app.get('/', (c) => {
           </li>
 
           <li class="dir-card">
+            <button class="dir-card__toggle" aria-label="Раскрыть описание" aria-expanded="false">
+              <span class="dir-card__toggle-icon" aria-hidden="true"></span>
+            </button>
             <div class="dir-card__media">
               <img src="/static/dir-4.jpg" alt="Чёрная собака даёт лапу человеку"
                 class="dir-card__img" loading="lazy" decoding="async"
@@ -174,6 +186,9 @@ app.get('/', (c) => {
           </li>
 
           <li class="dir-card">
+            <button class="dir-card__toggle" aria-label="Раскрыть описание" aria-expanded="false">
+              <span class="dir-card__toggle-icon" aria-hidden="true"></span>
+            </button>
             <div class="dir-card__media">
               <img src="/static/dir-5.jpg" alt="Голова собаки рядом с рукой, держащей синий поводок"
                 class="dir-card__img" loading="lazy" decoding="async"

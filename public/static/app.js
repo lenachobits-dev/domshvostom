@@ -17,97 +17,158 @@ revealItems.forEach((item) => revealObserver.observe(item))
 
 /* ═══════════════════════════════════════════════════════════
    DIRECTIONS SLIDER
-   — drag-to-scroll мышью
-   — стрелки prev/next (scroll на ширину карточки)
-   — обновление disabled-состояния стрелок
-   — tap-to-reveal на touch-устройствах
    ═══════════════════════════════════════════════════════════ */
 
-const track    = document.getElementById('dir-track')
-const btnPrev  = document.getElementById('dir-prev')
-const btnNext  = document.getElementById('dir-next')
+;(function () {
+  const track   = document.getElementById('dir-track')
+  const btnPrev = document.getElementById('dir-prev')
+  const btnNext = document.getElementById('dir-next')
 
-if (track && btnPrev && btnNext) {
+  if (!track || !btnPrev || !btnNext) return
 
-  /* ── Ширина шага прокрутки = ширина первой карточки + gap ── */
+  /* ── Утилиты ────────────────────────────────────────────── */
+
+  // Ширина одного шага (карточка + gap)
   const getStep = () => {
     const card = track.querySelector('.dir-card')
     if (!card) return 320
-    const gap = parseFloat(getComputedStyle(track).gap) || 20
+    const style = getComputedStyle(track)
+    const gap   = parseFloat(style.columnGap || style.gap) || 20
     return card.offsetWidth + gap
   }
 
-  /* ── Обновление disabled-состояния стрелок ──────────────── */
+  // Обновление disabled-состояния стрелок
   const updateNav = () => {
-    const maxScroll = track.scrollWidth - track.clientWidth
-    btnPrev.disabled = track.scrollLeft <= 2
-    btnNext.disabled = track.scrollLeft >= maxScroll - 2
+    const max = track.scrollWidth - track.clientWidth
+    btnPrev.disabled = track.scrollLeft <= 1
+    btnNext.disabled = track.scrollLeft >= max - 1
   }
 
   track.addEventListener('scroll', updateNav, { passive: true })
-  // начальное состояние
-  updateNav()
+  // Небольшая задержка — дать DOM отрисоваться
+  requestAnimationFrame(updateNav)
 
-  /* ── Стрелки: плавная прокрутка ─────────────────────────── */
+  /* ── Стрелки ────────────────────────────────────────────── */
   btnNext.addEventListener('click', () => {
     track.scrollBy({ left: getStep(), behavior: 'smooth' })
   })
-
   btnPrev.addEventListener('click', () => {
     track.scrollBy({ left: -getStep(), behavior: 'smooth' })
   })
 
-  /* ── Drag-to-scroll мышью ───────────────────────────────── */
-  let isDragging  = false
+  /* ── Drag-to-scroll ─────────────────────────────────────── */
+  // Используем pointerId для надёжного захвата
+  const DRAG_THRESHOLD = 6   // px — ниже порога → считаем кликом
+
+  let pointerId   = null
   let startX      = 0
-  let scrollStart = 0
-  let hasDragged  = false   // отличаем drag от клика
+  let startScroll = 0
+  let dragDelta   = 0
+  let isDragging  = false
 
-  track.addEventListener('mousedown', (e) => {
-    isDragging  = true
-    hasDragged  = false
-    startX      = e.pageX
-    scrollStart = track.scrollLeft
-    track.style.userSelect = 'none'
-  })
+  track.addEventListener('pointerdown', (e) => {
+    // Только основная кнопка мыши или тач
+    if (e.button !== 0 && e.pointerType === 'mouse') return
+    // Игнорируем нажатия на кнопку toggle, чтобы не мешать открытию
+    if (e.target.closest('.dir-card__toggle')) return
 
-  window.addEventListener('mousemove', (e) => {
-    if (!isDragging) return
-    const dx = e.pageX - startX
-    if (Math.abs(dx) > 4) hasDragged = true
-    track.scrollLeft = scrollStart - dx
-  })
+    pointerId   = e.pointerId
+    startX      = e.clientX
+    startScroll = track.scrollLeft
+    dragDelta   = 0
+    isDragging  = false
 
-  window.addEventListener('mouseup', () => {
-    isDragging = false
-    track.style.userSelect = ''
-  })
+    track.setPointerCapture(e.pointerId)
+    track.classList.remove('is-dragging')
+  }, { passive: true })
 
-  /* Предотвращаем переход по ссылке / клик после drag */
-  track.addEventListener('click', (e) => {
-    if (hasDragged) e.stopPropagation()
-  }, true)
-}
+  track.addEventListener('pointermove', (e) => {
+    if (e.pointerId !== pointerId) return
 
+    dragDelta = e.clientX - startX
 
-/* ── Tap-to-reveal на touch-устройствах ──────────────────── */
-const isTouchOnly = () =>
-  window.matchMedia('(hover: none) and (pointer: coarse)').matches
+    if (!isDragging && Math.abs(dragDelta) > DRAG_THRESHOLD) {
+      isDragging = true
+      track.classList.add('is-dragging')
+    }
 
-const dirCards = document.querySelectorAll('.dir-card')
+    if (isDragging) {
+      // Прямое присвоение scrollLeft — без momentum, без рывков
+      track.scrollLeft = startScroll - dragDelta
+    }
+  }, { passive: true })
 
-dirCards.forEach((card) => {
-  card.addEventListener('click', () => {
-    if (!isTouchOnly()) return
-    const isOpen = card.classList.contains('is-open')
-    dirCards.forEach((c) => c.classList.remove('is-open'))
-    if (!isOpen) card.classList.add('is-open')
-  })
-})
+  const endDrag = (e) => {
+    if (e.pointerId !== pointerId) return
+    pointerId = null
+    track.classList.remove('is-dragging')
 
-document.addEventListener('click', (e) => {
-  if (!isTouchOnly()) return
-  if (!e.target.closest('.dir-card')) {
-    dirCards.forEach((c) => c.classList.remove('is-open'))
+    // Если реально тащили — не даём клику сработать
+    if (isDragging) {
+      isDragging = false
+      // Небольшая задержка чтобы pointerup → click не сработал
+      track._suppressNextClick = true
+      setTimeout(() => { track._suppressNextClick = false }, 120)
+    }
   }
-})
+
+  track.addEventListener('pointerup',     endDrag, { passive: true })
+  track.addEventListener('pointercancel', endDrag, { passive: true })
+
+  // Подавляем клик после drag
+  track.addEventListener('click', (e) => {
+    if (track._suppressNextClick) {
+      e.stopPropagation()
+      e.preventDefault()
+    }
+  }, true)
+
+  /* ═══════════════════════════════════════════════════════════
+     КАРТОЧКИ: открытие/закрытие по клику (+ иконка или сама карточка)
+     — Hover на десктопе работает через CSS, не через JS
+     — Клик/тап даёт persistent открытое состояние
+     ═══════════════════════════════════════════════════════════ */
+
+  const cards = Array.from(track.querySelectorAll('.dir-card'))
+
+  const closeAll = () => {
+    cards.forEach((c) => {
+      c.classList.remove('is-open')
+      const btn = c.querySelector('.dir-card__toggle')
+      if (btn) {
+        btn.setAttribute('aria-expanded', 'false')
+        btn.setAttribute('aria-label', 'Раскрыть описание')
+      }
+    })
+  }
+
+  const toggleCard = (card) => {
+    const isOpen = card.classList.contains('is-open')
+    closeAll()
+    if (!isOpen) {
+      card.classList.add('is-open')
+      const btn = card.querySelector('.dir-card__toggle')
+      if (btn) {
+        btn.setAttribute('aria-expanded', 'true')
+        btn.setAttribute('aria-label', 'Закрыть описание')
+      }
+    }
+  }
+
+  cards.forEach((card) => {
+    // Клик по всей карточке (или по кнопке toggle внутри неё)
+    card.addEventListener('click', (e) => {
+      // Если был drag — выходим (клик подавлен выше, но дополнительная защита)
+      if (track._suppressNextClick) return
+      toggleCard(card)
+    })
+  })
+
+  // Клик вне трека — закрываем все
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#dir-track')) {
+      closeAll()
+    }
+  })
+
+})()
