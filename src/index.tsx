@@ -66,6 +66,29 @@ app.get('/', (c) => {
         </ul>
       </div>
     </section>
+
+    <!-- Trust block: отображается только на мобиле, дублирует факты из hero -->
+    <section class="trust-block" aria-label="Наши достижения">
+      <ul class="trust-list shell">
+        <li class="trust-item">
+          <span class="trust-item__icon"><i class="fas fa-heart"></i></span>
+          <span class="trust-item__text">Больше 5 лет реальной помощи животным</span>
+        </li>
+        <li class="trust-item">
+          <span class="trust-item__icon"><i class="fas fa-home"></i></span>
+          <span class="trust-item__text">Действующий приют</span>
+        </li>
+        <li class="trust-item">
+          <span class="trust-item__icon"><i class="fas fa-stethoscope"></i></span>
+          <span class="trust-item__text">Развитие ветеринарного и грумерского направления</span>
+        </li>
+        <li class="trust-item">
+          <span class="trust-item__icon"><i class="fas fa-seedling"></i></span>
+          <span class="trust-item__text">Строительство нового эко-системного Центра «Территория Добрых Дел»</span>
+        </li>
+      </ul>
+    </section>
+
     <section id="about-section" class="about-block reveal-up">
       <div class="about-inner shell">
 

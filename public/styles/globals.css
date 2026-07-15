@@ -216,41 +216,131 @@ body {
     width: min(1120px, calc(100% - 1.4rem));
   }
 
-  /* На мобиле overlay чуть светлее — видео лучше просвечивает */
+  /* ── Hero: мобильная раскладка ───────────────────────────── */
+  /* Контент сидит в нижней половине — видео дышит сверху */
+  .hero-block {
+    align-items: flex-end;
+  }
+
+  .hero-content {
+    /* Убираем общий padding-block — управляем вручную */
+    padding-block: 0;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 24px);
+    padding-bottom: 72px;
+    /* Фиксированные боковые отступы вместо shell-формулы */
+    padding-inline: 20px;
+    width: 100%;
+    /* Заголовок начинается примерно на 56–60% высоты экрана:
+       растягиваем контент на всю высоту, текст прижат к низу */
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  /* Чуть светлее overlay — видео лучше виден */
   .hero-overlay {
     background:
       linear-gradient(
         to bottom,
-        rgba(18, 23, 16, 0.20) 0%,
-        rgba(18, 23, 16, 0.55) 40%,
+        rgba(18, 23, 16, 0.15) 0%,
+        rgba(18, 23, 16, 0.50) 42%,
         rgba(10, 14, 9, 0.88) 100%
       );
+  }
+
+  .hero-text {
+    max-width: 100%;
   }
 
   .hero-text::before {
     margin-bottom: 1rem;
   }
 
+  .hero-text h1 {
+    font-size: clamp(1.75rem, 7.5vw, 2.2rem);
+    margin-bottom: 0;
+  }
+
+  .lead {
+    margin-top: 1rem;   /* gap: 16px между h1 и описанием */
+    font-size: 0.97rem;
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    margin-top: 1.25rem; /* gap: 20px между описанием и кнопками */
+  }
+
+  /* Факты в hero — скрыты на мобиле, переехали в trust-block */
   .hero-facts {
-    grid-template-columns: 1fr;
+    display: none;
   }
+}
 
-  .hero-fact {
-    padding: 0.85rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.10);
-  }
 
-  .hero-fact:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
+/* ═══════════════════════════════════════════════════════════
+   TRUST BLOCK — факты под hero (только мобиль)
+   ═══════════════════════════════════════════════════════════ */
 
-  .hero-fact:nth-child(-n+2) {
-    border-top: 1px solid rgba(255, 255, 255, 0.10);
-  }
+.trust-block {
+  /* Скрыт на десктопе — факты показываются внутри hero */
+  display: none;
+  background: var(--color-secondary);
+  padding-block: 1.75rem 2rem;
+  border-bottom: 1px solid rgba(102, 115, 90, 0.10);
+}
 
-  .hero-fact:nth-child(-n+2):first-child {
-    border-top: none;
+.trust-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(102, 115, 90, 0.08);
+}
+
+.trust-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.trust-item:first-child {
+  padding-top: 0;
+}
+
+.trust-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  background: rgba(181, 79, 69, 0.10);
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  margin-top: 1px;
+}
+
+.trust-item__text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-soft);
+}
+
+/* Показываем только на мобиле */
+@media (max-width: 640px) {
+  .trust-block {
+    display: block;
   }
 }
 
