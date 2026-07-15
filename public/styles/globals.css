@@ -382,25 +382,28 @@ body {
 
 
 /* ═══════════════════════════════════════════════════════════
-   БЛОК 3 — Направления работы
+   БЛОК 3 — Направления работы (горизонтальный слайдер)
    ═══════════════════════════════════════════════════════════ */
 
 .directions-block {
   background: #ffffff;
   padding-block: clamp(5rem, 10vh, 8rem);
+  overflow: hidden;
 }
 
-/* ─── Заголовок секции ────────────────────────────────────── */
-.directions-inner {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(2.5rem, 5vh, 4rem);
-}
-
+/* ─── Шапка секции: заголовок + стрелки ──────────────────── */
 .directions-header {
   display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: clamp(2rem, 4vh, 3rem);
+}
+
+.directions-header__text {
+  display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .directions-overline {
@@ -421,42 +424,96 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* ─── Сетка карточек ──────────────────────────────────────── */
-.directions-grid {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto;
-  gap: 1.25rem;
+/* ─── Кнопки-стрелки ─────────────────────────────────────── */
+.directions-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
-/* 5-я карточка — центрируем в последней строке */
-.dir-card:nth-child(4) { grid-column: 1; }
-.dir-card:nth-child(5) { grid-column: 2; }
+.dir-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  background: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-gentle),
+    border-color var(--duration-fast) var(--ease-gentle),
+    color var(--duration-fast) var(--ease-gentle),
+    opacity var(--duration-fast) ease;
+}
+
+.dir-nav-btn:hover:not(:disabled) {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.dir-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ─── Трек-обёртка: горизонтальный скролл ────────────────── */
+.directions-track-wrap {
+  /* отрицательные отступы, чтобы полоса выходила за shell */
+  margin-inline: calc((100vw - min(1120px, calc(100% - 0px))) / -2);
+  padding-inline: calc((100vw - min(1120px, 100% - 2rem)) / 2);
+  overflow: hidden;
+}
+
+/* ─── Трек карточек ───────────────────────────────────────── */
+.directions-track {
+  margin: 0;
+  padding: 0;
+  padding-inline: max(1rem, calc((100vw - 1120px) / 2));
+  padding-bottom: 1rem; /* место для тени */
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.directions-track:active {
+  cursor: grabbing;
+}
+
+.directions-track::-webkit-scrollbar {
+  display: none;
+}
 
 /* ─── Одна карточка ───────────────────────────────────────── */
 .dir-card {
   position: relative;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
   cursor: pointer;
-  /* плавный подъём при hover */
+  flex: 0 0 clamp(260px, 28vw, 360px);
+  aspect-ratio: 3 / 4;
+  scroll-snap-align: start;
   transition:
     transform var(--duration-standard) var(--ease-gentle),
     box-shadow var(--duration-standard) var(--ease-gentle);
-  box-shadow: 0 2px 12px rgba(66, 80, 58, 0.07);
-  /* фиксированная высота для всех карточек */
-  aspect-ratio: 3 / 4;
+  box-shadow: 0 2px 14px rgba(66, 80, 58, 0.08);
 }
 
 .dir-card:hover,
 .dir-card.is-open {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   box-shadow:
-    0 8px 24px rgba(66, 80, 58, 0.12),
-    0 24px 56px rgba(66, 80, 58, 0.10);
+    0 10px 28px rgba(66, 80, 58, 0.13),
+    0 28px 60px rgba(66, 80, 58, 0.09);
 }
 
 /* ─── Фото ────────────────────────────────────────────────── */
@@ -470,79 +527,81 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 20%;
   display: block;
-  transition: transform 600ms var(--ease-gentle);
+  /* object-position задаётся inline на каждом изображении */
+  transition: transform 700ms var(--ease-gentle);
   will-change: transform;
 }
 
 .dir-card:hover .dir-card__img,
 .dir-card.is-open .dir-card__img {
-  transform: scale(1.02);
+  transform: scale(1.06);
 }
 
-/* ─── Overlay: постоянный градиент снизу ─────────────────── */
+/* ─── Overlay ─────────────────────────────────────────────── */
 .dir-card__overlay {
   position: absolute;
   inset: 0;
-  /* базовый градиент — заголовок всегда читается */
+  /* базовый: тёмный снизу — заголовок всегда читается */
   background: linear-gradient(
     to top,
-    rgba(16, 20, 14, 0.82) 0%,
-    rgba(16, 20, 14, 0.40) 38%,
-    rgba(16, 20, 14, 0.05) 65%,
-    transparent 100%
+    rgba(14, 18, 12, 0.85) 0%,
+    rgba(14, 18, 12, 0.35) 35%,
+    transparent 62%
   );
-  transition: background var(--duration-standard) var(--ease-gentle);
+  transition: background 380ms var(--ease-gentle);
   display: flex;
   align-items: flex-end;
 }
 
-/* При hover overlay темнеет — фон для описания */
+/* hover: overlay темнее, место для описания */
 .dir-card:hover .dir-card__overlay,
 .dir-card.is-open .dir-card__overlay {
   background: linear-gradient(
     to top,
-    rgba(16, 20, 14, 0.92) 0%,
-    rgba(16, 20, 14, 0.72) 50%,
-    rgba(16, 20, 14, 0.18) 80%,
+    rgba(14, 18, 12, 0.95) 0%,
+    rgba(14, 18, 12, 0.70) 45%,
+    rgba(14, 18, 12, 0.12) 75%,
     transparent 100%
   );
 }
 
-/* ─── Тело карточки (заголовок + описание) ───────────────── */
+/* ─── Тело карточки ───────────────────────────────────────── */
 .dir-card__body {
-  padding: 1.4rem 1.5rem;
+  padding: 1.5rem 1.6rem;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.65rem;
+  /* заголовок — левый нижний угол */
+  text-align: left;
 }
 
+/* Заголовок — крупный, всегда виден */
 .dir-card__title {
   margin: 0;
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
-  line-height: 1.25;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  line-height: 1.2;
   color: #ffffff;
   letter-spacing: -0.01em;
 }
 
-/* Описание — скрыто по умолчанию, появляется при hover */
+/* Описание — скрыто по умолчанию */
 .dir-card__desc {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.80);
-  /* fade + slide вверх */
+  color: rgba(255, 255, 255, 0.82);
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(10px);
   transition:
-    opacity var(--duration-standard) var(--ease-gentle),
-    transform var(--duration-standard) var(--ease-gentle);
+    opacity 320ms var(--ease-gentle),
+    transform 320ms var(--ease-gentle);
   pointer-events: none;
+  max-width: 32ch;
 }
 
 .dir-card:hover .dir-card__desc,
@@ -552,38 +611,42 @@ body {
   pointer-events: auto;
 }
 
-/* ─── Адаптив ─────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .directions-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .dir-card:nth-child(4) { grid-column: auto; }
-  .dir-card:nth-child(5) { grid-column: auto; }
-}
-
-@media (max-width: 560px) {
-  .directions-grid {
-    grid-template-columns: 1fr;
+/* ─── Mobile ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .directions-track {
     gap: 1rem;
   }
 
   .dir-card {
-    aspect-ratio: 4 / 3;
+    flex: 0 0 78vw;
+    aspect-ratio: 3 / 4;
+    border-radius: 14px;
+  }
+
+  /* На мобиле: заголовок снизу, описание НЕ перекрывает фокус фото.
+     Тело прибито к самому низу, фото сверху остаётся открытым */
+  .dir-card__body {
+    padding: 1.1rem 1.25rem;
+  }
+
+  .dir-card__title {
+    font-size: 1.05rem;
   }
 
   /* На мобиле описание всегда видно */
   .dir-card__desc {
     opacity: 1;
     transform: translateY(0);
+    font-size: 0.82rem;
+    max-width: 100%;
   }
 
   .dir-card__overlay {
     background: linear-gradient(
       to top,
-      rgba(16, 20, 14, 0.88) 0%,
-      rgba(16, 20, 14, 0.55) 45%,
-      transparent 100%
+      rgba(14, 18, 12, 0.90) 0%,
+      rgba(14, 18, 12, 0.50) 35%,
+      transparent 58%
     );
   }
 }
