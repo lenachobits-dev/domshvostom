@@ -26,7 +26,8 @@ app.get('/', (c) => {
 <body>
   <main id="main-content">
     <section id="hero-section" class="hero-block reveal-up">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline webkit-playsinline preload="metadata" aria-hidden="true" disableRemotePlayback x-webkit-airplay="deny">
+        <source src="/static/hero-bg-mobile.mp4" type="video/mp4" media="(max-width: 768px)" />
         <source src="/static/hero-bg.mp4" type="video/mp4" />
       </video>
       <div class="hero-overlay"></div>
