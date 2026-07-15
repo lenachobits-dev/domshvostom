@@ -577,74 +577,9 @@ body {
   );
 }
 
-/* ─── Иконка +/× ─────────────────────────────────────────── */
+/* ─── Иконка +/× — скрыта ────────────────────────────────── */
 .dir-card__toggle {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  /* Всегда выше overlay (z-index: 2) и выше всего */
-  z-index: 20;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.55);
-  background: rgba(14, 18, 12, 0.28);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  /* плавный переход */
-  transition:
-    background 220ms ease-out,
-    border-color 220ms ease-out,
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  flex-shrink: 0;
-}
-
-.dir-card__toggle:hover {
-  background: rgba(181, 79, 69, 0.70);
-  border-color: rgba(181, 79, 69, 0.80);
-}
-
-/* Иконки + и × — переключение через rotate */
-.dir-card__toggle-icon {
-  display: block;
-  width: 14px;
-  height: 14px;
-  position: relative;
-  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* горизонтальная черта */
-.dir-card__toggle-icon::before,
-.dir-card__toggle-icon::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1.5px;
-  background: #fff;
-  border-radius: 1px;
-  transform-origin: center;
-  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* вертикальная черта (только у +) */
-.dir-card__toggle-icon::after {
-  transform: rotate(90deg);
-}
-
-/* Состояние is-open: поворачиваем в × */
-.dir-card.is-open .dir-card__toggle-icon::before {
-  transform: rotate(45deg);
-}
-
-.dir-card.is-open .dir-card__toggle-icon::after {
-  transform: rotate(-45deg);
+  display: none;
 }
 
 /* ─── Тело карточки ───────────────────────────────────────── */
