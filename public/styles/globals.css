@@ -347,6 +347,16 @@ body {
   .trust-block {
     display: block;
   }
+
+  /* Список выровнен по той же 20px сетке что и hero.
+     .shell на trust-list даёт margin-inline: 20px — иконки стоят на 20px.
+     Убираем shell-ширину, заменяем на прямой padding на родителе
+     чтобы иконки и текст hero начинались с одной линии. */
+  .trust-block .trust-list {
+    width: 100%;
+    margin-inline: 0;
+    padding-inline: 20px;
+  }
 }
 
 
