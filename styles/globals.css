@@ -583,22 +583,46 @@ body {
 }
 
 /* ─── Тело карточки ───────────────────────────────────────── */
-/* Контейнер прибит к низу карточки, поверх overlay */
+/*
+ * Механика:
+ *  • .dir-card__body — flex-колонка, прибита к НИЗУ карточки
+ *  • Default: translateY(calc(desc-height + gap)) — title внизу,
+ *    desc спрятан за нижним краем (clip через overflow:hidden на card)
+ *  • Hover/open: translateY(0) — весь блок едет вверх,
+ *    открывая desc под title
+ *
+ * Это даёт чистое движение: title плавно поднимается,
+ * desc появляется строго под ним, иерархия title→desc сохранена.
+ */
 .dir-card__body {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  /* z-index выше overlay, pointer-events включены */
   z-index: 3;
-  padding: 0 1.5rem 1.4rem;
-  text-align: left;
-  /* pointer-events включены — нужны для текста */
+  padding: 0 1.5rem 1.5rem;
   pointer-events: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+
+  /* В дефолтном состоянии сдвигаем весь блок вниз —
+     на высоту desc + gap, чтобы desc ушёл за нижний край.
+     Используем CSS-переменную, чтобы легко менять. */
+  --body-offset: 5.5rem;
+  transform: translateY(var(--body-offset));
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
-/* Заголовок — абсолютно зафиксирован в левом нижнем углу */
-/* Его позиция не меняется при hover или открытии */
+/* Hover / открыта — весь блок едет в свою финальную позицию */
+.dir-card:hover .dir-card__body,
+.dir-card.is-open .dir-card__body {
+  transform: translateY(0);
+}
+
+/* Заголовок — статичен внутри body, всегда первый в DOM */
 .dir-card__title {
   margin: 0;
   font-family: var(--font-heading);
@@ -607,35 +631,31 @@ body {
   line-height: 1.22;
   color: #ffffff;
   letter-spacing: -0.01em;
-  /* Title всегда на одном уровне — независимо от описания */
+  /* Не нужен собственный transition — движение через body */
 }
 
-/* Описание — скрыто, появляется плавно ВЫШЕ заголовка */
+/* Описание — идёт после title в DOM и визуально тоже */
 .dir-card__desc {
   margin: 0;
-  margin-bottom: 0.6rem;
   font-family: var(--font-body);
   font-size: 0.88rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.80);
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 28ch;
+
+  /* Скрыто в дефолте: прозрачно + чуть сдвинуто вниз */
   opacity: 0;
-  max-height: 0;
-  overflow: hidden;
   transform: translateY(6px);
   transition:
-    opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    max-height 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    margin-bottom 300ms cubic-bezier(0.22, 1, 0.36, 1);
-  max-width: 30ch;
+    opacity 280ms 60ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 280ms 60ms cubic-bezier(0.22, 1, 0.36, 1);
+  /* 60ms delay — появляется чуть позже, после начала движения body */
 }
 
 .dir-card:hover .dir-card__desc,
 .dir-card.is-open .dir-card__desc {
   opacity: 1;
-  max-height: 8rem;
   transform: translateY(0);
-  margin-bottom: 0.6rem;
 }
 
 /* ─── Mobile ──────────────────────────────────────────────── */
@@ -655,7 +675,10 @@ body {
     border-radius: 14px;
   }
 
+  /* На мобиле описание всегда видно — body без смещения */
   .dir-card__body {
+    --body-offset: 0px;
+    transform: translateY(0);
     padding: 0 1.15rem 1rem;
   }
 
@@ -663,12 +686,9 @@ body {
     font-size: 1rem;
   }
 
-  /* На мобиле описание всегда видно */
   .dir-card__desc {
     opacity: 1;
-    max-height: 8rem;
     transform: translateY(0);
-    margin-bottom: 0.5rem;
     font-size: 0.82rem;
     max-width: 100%;
   }
