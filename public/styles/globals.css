@@ -660,14 +660,18 @@ body {
 
 /* ─── Mobile ──────────────────────────────────────────────── */
 @media (max-width: 640px) {
+  /* track-wrap уже растянут на 100vw через margin-inline: calc(50% - 50vw)
+     из десктопных стилей — это работает и на мобиле.
+     Убираем переопределение с -1rem, которое давало асимметрию. */
   .directions-track-wrap {
-    margin-inline: -1rem;
-    width: calc(100% + 2rem);
+    margin-inline: calc(50% - 50vw);
+    width: 100vw;
   }
 
+  /* Симметричный отступ: одинаковый слева и справа */
   .directions-track {
     gap: 1rem;
-    padding-inline: 1rem;
+    padding-inline: 1.25rem;
   }
 
   .dir-card {
