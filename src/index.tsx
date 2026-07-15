@@ -126,11 +126,10 @@ app.get('/', (c) => {
                 class="dir-card__img" loading="lazy" decoding="async"
                 style="object-position: center 35%;" />
             </div>
-            <div class="dir-card__overlay">
-              <div class="dir-card__body">
-                <h3 class="dir-card__title">Помощь в трудных случаях</h3>
-                <p class="dir-card__desc">Берём в работу сложные случаи, когда животному действительно нужна помощь, а у приюта есть возможность обеспечить уход, восстановление и сопровождение.</p>
-              </div>
+            <div class="dir-card__overlay"></div>
+            <div class="dir-card__body">
+              <p class="dir-card__desc">Берём в работу сложные случаи, когда животному действительно нужна помощь, а у приюта есть возможность обеспечить уход, восстановление и сопровождение.</p>
+              <h3 class="dir-card__title">Помощь в трудных случаях</h3>
             </div>
           </li>
 
@@ -143,11 +142,10 @@ app.get('/', (c) => {
                 class="dir-card__img" loading="lazy" decoding="async"
                 style="object-position: center 40%;" />
             </div>
-            <div class="dir-card__overlay">
-              <div class="dir-card__body">
-                <h3 class="dir-card__title">Лечение и восстановление</h3>
-                <p class="dir-card__desc">Организуем ветеринарную помощь, диагностику, восстановление после травм и болезней.</p>
-              </div>
+            <div class="dir-card__overlay"></div>
+            <div class="dir-card__body">
+              <p class="dir-card__desc">Организуем ветеринарную помощь, диагностику, восстановление после травм и болезней.</p>
+              <h3 class="dir-card__title">Лечение и восстановление</h3>
             </div>
           </li>
 
@@ -160,11 +158,10 @@ app.get('/', (c) => {
                 class="dir-card__img" loading="lazy" decoding="async"
                 style="object-position: center 25%;" />
             </div>
-            <div class="dir-card__overlay">
-              <div class="dir-card__body">
-                <h3 class="dir-card__title">Уход и социализация</h3>
-                <p class="dir-card__desc">Помогаем животным снова почувствовать безопасность, привыкнуть к человеку и подготовиться к жизни в семье.</p>
-              </div>
+            <div class="dir-card__overlay"></div>
+            <div class="dir-card__body">
+              <p class="dir-card__desc">Помогаем животным снова почувствовать безопасность, привыкнуть к человеку и подготовиться к жизни в семье.</p>
+              <h3 class="dir-card__title">Уход и социализация</h3>
             </div>
           </li>
 
@@ -177,11 +174,10 @@ app.get('/', (c) => {
                 class="dir-card__img" loading="lazy" decoding="async"
                 style="object-position: center 30%;" />
             </div>
-            <div class="dir-card__overlay">
-              <div class="dir-card__body">
-                <h3 class="dir-card__title">Поиск дома</h3>
-                <p class="dir-card__desc">Рассказываем истории наших подопечных, знакомим их с будущими хозяевами и помогаем обрести дом.</p>
-              </div>
+            <div class="dir-card__overlay"></div>
+            <div class="dir-card__body">
+              <p class="dir-card__desc">Рассказываем истории наших подопечных, знакомим их с будущими хозяевами и помогаем обрести дом.</p>
+              <h3 class="dir-card__title">Поиск дома</h3>
             </div>
           </li>
 
@@ -194,11 +190,10 @@ app.get('/', (c) => {
                 class="dir-card__img" loading="lazy" decoding="async"
                 style="object-position: center 45%;" />
             </div>
-            <div class="dir-card__overlay">
-              <div class="dir-card__body">
-                <h3 class="dir-card__title">Развитие устойчивой системы</h3>
-                <p class="dir-card__desc">Создаём инфраструктуру, которая позволит помогать не разово, а системно и качественно.</p>
-              </div>
+            <div class="dir-card__overlay"></div>
+            <div class="dir-card__body">
+              <p class="dir-card__desc">Создаём инфраструктуру, которая позволит помогать не разово, а системно и качественно.</p>
+              <h3 class="dir-card__title">Развитие устойчивой системы</h3>
             </div>
           </li>
 

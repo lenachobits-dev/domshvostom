@@ -45,7 +45,6 @@ revealItems.forEach((item) => revealObserver.observe(item))
   }
 
   track.addEventListener('scroll', updateNav, { passive: true })
-  // Небольшая задержка — дать DOM отрисоваться
   requestAnimationFrame(updateNav)
 
   /* ── Стрелки ────────────────────────────────────────────── */
@@ -58,7 +57,8 @@ revealItems.forEach((item) => revealObserver.observe(item))
 
   /* ── Drag-to-scroll ─────────────────────────────────────── */
   // Используем pointerId для надёжного захвата
-  const DRAG_THRESHOLD = 6   // px — ниже порога → считаем кликом
+  // DRAG_THRESHOLD: движение меньше порога — считаем кликом, не drag'ом
+  const DRAG_THRESHOLD = 8   // px
 
   let pointerId   = null
   let startX      = 0
@@ -69,7 +69,8 @@ revealItems.forEach((item) => revealObserver.observe(item))
   track.addEventListener('pointerdown', (e) => {
     // Только основная кнопка мыши или тач
     if (e.button !== 0 && e.pointerType === 'mouse') return
-    // Игнорируем нажатия на кнопку toggle, чтобы не мешать открытию
+
+    // Кнопку toggle НЕ перехватываем — пусть браузер обрабатывает её click
     if (e.target.closest('.dir-card__toggle')) return
 
     pointerId   = e.pointerId
@@ -93,7 +94,6 @@ revealItems.forEach((item) => revealObserver.observe(item))
     }
 
     if (isDragging) {
-      // Прямое присвоение scrollLeft — без momentum, без рывков
       track.scrollLeft = startScroll - dragDelta
     }
   }, { passive: true })
@@ -103,10 +103,9 @@ revealItems.forEach((item) => revealObserver.observe(item))
     pointerId = null
     track.classList.remove('is-dragging')
 
-    // Если реально тащили — не даём клику сработать
     if (isDragging) {
       isDragging = false
-      // Небольшая задержка чтобы pointerup → click не сработал
+      // Флаг: сразу после drag — следующий click-event игнорируем
       track._suppressNextClick = true
       setTimeout(() => { track._suppressNextClick = false }, 120)
     }
@@ -115,18 +114,11 @@ revealItems.forEach((item) => revealObserver.observe(item))
   track.addEventListener('pointerup',     endDrag, { passive: true })
   track.addEventListener('pointercancel', endDrag, { passive: true })
 
-  // Подавляем клик после drag
-  track.addEventListener('click', (e) => {
-    if (track._suppressNextClick) {
-      e.stopPropagation()
-      e.preventDefault()
-    }
-  }, true)
-
   /* ═══════════════════════════════════════════════════════════
-     КАРТОЧКИ: открытие/закрытие по клику (+ иконка или сама карточка)
-     — Hover на десктопе работает через CSS, не через JS
-     — Клик/тап даёт persistent открытое состояние
+     КАРТОЧКИ: открытие/закрытие
+     — toggle-кнопка: клик → открыть/закрыть карточку
+     — клик по карточке (не по toggle): открыть/закрыть
+     — drag НЕ открывает карточку (порог 8px)
      ═══════════════════════════════════════════════════════════ */
 
   const cards = Array.from(track.querySelectorAll('.dir-card'))
@@ -155,16 +147,34 @@ revealItems.forEach((item) => revealObserver.observe(item))
     }
   }
 
+  // ── Клик по toggle-кнопке ───────────────────────────────
+  // Вешаем ОТДЕЛЬНЫЙ listener на каждую кнопку.
+  // stopPropagation() не даёт event всплыть до card-listener,
+  // иначе toggleCard вызвался бы дважды (открыл и сразу закрыл).
   cards.forEach((card) => {
-    // Клик по всей карточке (или по кнопке toggle внутри неё)
+    const toggleBtn = card.querySelector('.dir-card__toggle')
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation()
+        // Если после drag — тоже игнорируем
+        if (track._suppressNextClick) return
+        toggleCard(card)
+      })
+    }
+  })
+
+  // ── Клик по карточке (вне toggle-кнопки) ───────────────
+  cards.forEach((card) => {
     card.addEventListener('click', (e) => {
-      // Если был drag — выходим (клик подавлен выше, но дополнительная защита)
+      // Если был drag — выходим
       if (track._suppressNextClick) return
+      // Клик по toggle уже обработан выше и остановлен stopPropagation
+      // Сюда доходят только клики по остальной части карточки
       toggleCard(card)
     })
   })
 
-  // Клик вне трека — закрываем все
+  // ── Клик вне трека — закрываем все ─────────────────────
   document.addEventListener('click', (e) => {
     if (!e.target.closest('#dir-track')) {
       closeAll()
