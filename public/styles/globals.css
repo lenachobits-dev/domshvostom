@@ -379,3 +379,211 @@ body {
     max-width: 100%;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   БЛОК 3 — Направления работы
+   ═══════════════════════════════════════════════════════════ */
+
+.directions-block {
+  background: #ffffff;
+  padding-block: clamp(5rem, 10vh, 8rem);
+}
+
+/* ─── Заголовок секции ────────────────────────────────────── */
+.directions-inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vh, 4rem);
+}
+
+.directions-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.directions-overline {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.directions-heading {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.5vw, 2.8rem);
+  line-height: 1.12;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+}
+
+/* ─── Сетка карточек ──────────────────────────────────────── */
+.directions-grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 1.25rem;
+}
+
+/* 5-я карточка — центрируем в последней строке */
+.dir-card:nth-child(4) { grid-column: 1; }
+.dir-card:nth-child(5) { grid-column: 2; }
+
+/* ─── Одна карточка ───────────────────────────────────────── */
+.dir-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  /* плавный подъём при hover */
+  transition:
+    transform var(--duration-standard) var(--ease-gentle),
+    box-shadow var(--duration-standard) var(--ease-gentle);
+  box-shadow: 0 2px 12px rgba(66, 80, 58, 0.07);
+  /* фиксированная высота для всех карточек */
+  aspect-ratio: 3 / 4;
+}
+
+.dir-card:hover,
+.dir-card.is-open {
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 24px rgba(66, 80, 58, 0.12),
+    0 24px 56px rgba(66, 80, 58, 0.10);
+}
+
+/* ─── Фото ────────────────────────────────────────────────── */
+.dir-card__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.dir-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  transition: transform 600ms var(--ease-gentle);
+  will-change: transform;
+}
+
+.dir-card:hover .dir-card__img,
+.dir-card.is-open .dir-card__img {
+  transform: scale(1.02);
+}
+
+/* ─── Overlay: постоянный градиент снизу ─────────────────── */
+.dir-card__overlay {
+  position: absolute;
+  inset: 0;
+  /* базовый градиент — заголовок всегда читается */
+  background: linear-gradient(
+    to top,
+    rgba(16, 20, 14, 0.82) 0%,
+    rgba(16, 20, 14, 0.40) 38%,
+    rgba(16, 20, 14, 0.05) 65%,
+    transparent 100%
+  );
+  transition: background var(--duration-standard) var(--ease-gentle);
+  display: flex;
+  align-items: flex-end;
+}
+
+/* При hover overlay темнеет — фон для описания */
+.dir-card:hover .dir-card__overlay,
+.dir-card.is-open .dir-card__overlay {
+  background: linear-gradient(
+    to top,
+    rgba(16, 20, 14, 0.92) 0%,
+    rgba(16, 20, 14, 0.72) 50%,
+    rgba(16, 20, 14, 0.18) 80%,
+    transparent 100%
+  );
+}
+
+/* ─── Тело карточки (заголовок + описание) ───────────────── */
+.dir-card__body {
+  padding: 1.4rem 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.dir-card__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  line-height: 1.25;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+/* Описание — скрыто по умолчанию, появляется при hover */
+.dir-card__desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.80);
+  /* fade + slide вверх */
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--duration-standard) var(--ease-gentle),
+    transform var(--duration-standard) var(--ease-gentle);
+  pointer-events: none;
+}
+
+.dir-card:hover .dir-card__desc,
+.dir-card.is-open .dir-card__desc {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ─── Адаптив ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .directions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dir-card:nth-child(4) { grid-column: auto; }
+  .dir-card:nth-child(5) { grid-column: auto; }
+}
+
+@media (max-width: 560px) {
+  .directions-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .dir-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* На мобиле описание всегда видно */
+  .dir-card__desc {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .dir-card__overlay {
+    background: linear-gradient(
+      to top,
+      rgba(16, 20, 14, 0.88) 0%,
+      rgba(16, 20, 14, 0.55) 45%,
+      transparent 100%
+    );
+  }
+}

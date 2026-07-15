@@ -94,6 +94,79 @@ app.get('/', (c) => {
 
       </div>
     </section>
+    <section id="directions-section" class="directions-block reveal-up">
+      <div class="directions-inner shell">
+
+        <div class="directions-header">
+          <p class="directions-overline">Что мы делаем</p>
+          <h2 class="directions-heading">Направления нашей работы</h2>
+        </div>
+
+        <ul class="directions-grid">
+
+          <li class="dir-card" data-index="1">
+            <div class="dir-card__media">
+              <img src="/static/dir-1.jpg" alt="Волонтёр с собакой у деревянного домика" class="dir-card__img" loading="lazy" decoding="async" />
+            </div>
+            <div class="dir-card__overlay">
+              <div class="dir-card__body">
+                <h3 class="dir-card__title">Помощь в трудных случаях</h3>
+                <p class="dir-card__desc">Берём в работу сложные случаи, когда животному действительно нужна помощь, а у приюта есть возможность обеспечить уход, восстановление и сопровождение.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="dir-card" data-index="2">
+            <div class="dir-card__media">
+              <img src="/static/dir-2.jpg" alt="Девушка играет с радостной собакой в саду" class="dir-card__img" loading="lazy" decoding="async" />
+            </div>
+            <div class="dir-card__overlay">
+              <div class="dir-card__body">
+                <h3 class="dir-card__title">Лечение и восстановление</h3>
+                <p class="dir-card__desc">Организуем ветеринарную помощь, диагностику, восстановление после травм и болезней.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="dir-card" data-index="3">
+            <div class="dir-card__media">
+              <img src="/static/dir-3.jpg" alt="Человек с табличкой и собака на поводке" class="dir-card__img" loading="lazy" decoding="async" />
+            </div>
+            <div class="dir-card__overlay">
+              <div class="dir-card__body">
+                <h3 class="dir-card__title">Уход и социализация</h3>
+                <p class="dir-card__desc">Помогаем животным снова почувствовать безопасность, привыкнуть к человеку и подготовиться к жизни в семье.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="dir-card" data-index="4">
+            <div class="dir-card__media">
+              <img src="/static/dir-4.jpg" alt="Чёрная собака даёт лапу человеку" class="dir-card__img" loading="lazy" decoding="async" />
+            </div>
+            <div class="dir-card__overlay">
+              <div class="dir-card__body">
+                <h3 class="dir-card__title">Поиск дома</h3>
+                <p class="dir-card__desc">Рассказываем истории наших подопечных, знакомим их с будущими хозяевами и помогаем обрести дом.</p>
+              </div>
+            </div>
+          </li>
+
+          <li class="dir-card" data-index="5">
+            <div class="dir-card__media">
+              <img src="/static/dir-5.jpg" alt="Голова собаки рядом с рукой, держащей синий поводок" class="dir-card__img" loading="lazy" decoding="async" />
+            </div>
+            <div class="dir-card__overlay">
+              <div class="dir-card__body">
+                <h3 class="dir-card__title">Развитие устойчивой системы</h3>
+                <p class="dir-card__desc">Создаём инфраструктуру, которая позволит помогать не разово, а системно и качественно.</p>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
   </main>
 
   <script src="/static/app.js" defer></script>
