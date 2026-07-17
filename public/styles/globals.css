@@ -830,3 +830,531 @@ body {
     );
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   БЛОК 4 — Пространство комплексной помощи (Paw Story)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Внешняя секция — задаёт высоту для scroll-drive ──────
+   Высота: 100vh (sticky) + 4 × 100vh (по одному шагу)
+   Итого 500vh — пользователь прокручивает через все 4 шага   */
+.paw-block {
+  position: relative;
+  height: 550vh;
+  background: var(--color-surface-soft);
+}
+
+/* ─── Sticky-контейнер — прикреплён к вьюпорту ─────────── */
+.paw-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface-soft);
+}
+
+/* ─── Шапка секции ──────────────────────────────────────── */
+.paw-header {
+  padding-top: clamp(2.5rem, 5vh, 4rem);
+  padding-bottom: 1.5rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.paw-overline {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.paw-heading {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  line-height: 1.12;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.paw-subheading {
+  margin: 0;
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  color: var(--color-text-soft);
+  max-width: 52ch;
+  margin-inline: auto;
+  line-height: 1.6;
+}
+
+/* ─── Stage: лапа + контент ─────────────────────────────── */
+.paw-stage {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  min-height: 0;
+  padding-bottom: 4rem;
+}
+
+/* ─── SVG Иллюстрация ───────────────────────────────────── */
+.paw-illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.paw-svg {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 8px 24px rgba(102,115,90,0.12));
+}
+
+/* ── Базовые стили зон SVG ─────────────────────────────── */
+.paw-zone {
+  transition:
+    transform 480ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity   380ms ease;
+}
+
+/* Неактивные пальцы — слегка приглушены */
+.paw-toe .paw-shape {
+  transition:
+    fill      380ms ease,
+    stroke    380ms ease,
+    filter    380ms ease;
+}
+
+.paw-toe .paw-toe__inner {
+  transition: fill 380ms ease;
+}
+
+/* ── Пятка — нейтральный теплый цвет ─────────────────────*/
+.paw-heel .paw-shape {
+  fill: #e8e3d8;
+  stroke: #c8c2b0;
+}
+
+/* ── Неактивный палец ─────────────────────────────────── */
+.paw-toe .paw-shape {
+  fill: #e8e3d8;
+  stroke: #c8c2b0;
+  stroke-width: 1.5;
+}
+
+/* ── Выполненный палец ─────────────────────────────────── */
+.paw-toe.is-done .paw-shape {
+  fill: rgba(102, 115, 90, 0.20);
+  stroke: var(--color-primary);
+}
+
+.paw-toe.is-done .paw-toe__inner {
+  fill: rgba(102, 115, 90, 0.12);
+}
+
+/* ── Активный палец — акцентный, чуть увеличен ──────────── */
+.paw-toe.is-active .paw-shape {
+  fill: rgba(181, 79, 69, 0.15);
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 12px rgba(181, 79, 69, 0.35));
+}
+
+.paw-toe.is-active .paw-toe__inner {
+  fill: rgba(181, 79, 69, 0.08);
+}
+
+.paw-toe.is-active {
+  transform-origin: center center;
+  animation: toePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes toePulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.06); }
+}
+
+/* Номера на пальцах — меняют цвет */
+.paw-toe-num {
+  transition: fill 380ms ease, font-size 380ms ease;
+  pointer-events: none;
+}
+
+.paw-toe.is-active .paw-toe-num {
+  fill: var(--color-accent);
+}
+
+.paw-toe.is-done .paw-toe-num {
+  fill: var(--color-primary);
+}
+
+/* Пятка при начальном состоянии (heel active) */
+.paw-heel.is-active .paw-shape {
+  fill: rgba(102, 115, 90, 0.18);
+  stroke: var(--color-primary);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 10px rgba(102, 115, 90, 0.30));
+}
+
+/* ─── Контентная зона ───────────────────────────────────── */
+.paw-content {
+  position: relative;
+  min-height: 320px;
+}
+
+/* ── Каждая панель абсолютно позиционирована, переключается── */
+.paw-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(24px);
+  transition:
+    opacity  420ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.paw-panel.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.paw-panel.is-leaving {
+  opacity: 0;
+  transform: translateY(-16px);
+  transition:
+    opacity  300ms ease,
+    transform 300ms ease;
+}
+
+/* ── Внутренний контент панели ───────────────────────────── */
+.paw-panel__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 480px;
+}
+
+/* Бейдж шага */
+.paw-panel__step-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.paw-panel__step-num {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: 0.90;
+  letter-spacing: -0.03em;
+}
+
+.paw-panel__step-label {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+}
+
+/* Overline панели пятки */
+.paw-panel__overline {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+/* Заголовок панели */
+.paw-panel__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+  line-height: 1.18;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Текст панели */
+.paw-panel__text {
+  margin: 0;
+  font-size: clamp(0.9rem, 1.3vw, 1rem);
+  line-height: 1.75;
+  color: var(--color-text-soft);
+  max-width: 46ch;
+}
+
+/* Список оборудования */
+.paw-panel__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.paw-panel__list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+  line-height: 1.4;
+}
+
+.paw-panel__list li i {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  opacity: 0.80;
+}
+
+/* Hint прокрутки — только в начальной панели */
+.paw-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--color-text-soft);
+  opacity: 0.60;
+  margin-top: 0.5rem;
+  animation: hintBounce 2s ease-in-out infinite;
+}
+
+@keyframes hintBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(3px); }
+}
+
+/* Скрываем hint когда история началась */
+.paw-block.story-started .paw-scroll-hint {
+  display: none;
+}
+
+/* ─── Индикатор прогресса ───────────────────────────────── */
+.paw-progress {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.paw-progress__track {
+  width: 160px;
+  height: 2px;
+  background: rgba(102, 115, 90, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.paw-progress__bar {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.paw-progress__dots {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.paw-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(102, 115, 90, 0.30);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 300ms ease,
+    border-color 300ms ease,
+    transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.paw-dot.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: scale(1.35);
+}
+
+.paw-dot.is-done {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  opacity: 0.55;
+}
+
+/* ─── Адаптив: tablet 768–1024px ───────────────────────── */
+@media (max-width: 1024px) {
+  .paw-stage {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .paw-svg {
+    max-width: 280px;
+  }
+}
+
+/* ─── Адаптив: мобиль ≤ 768px ───────────────────────────
+   На мобиле sticky-scroll может раздражать.
+   Переключаемся на лёгкий tap-to-advance вместо scroll-lock.  */
+@media (max-width: 768px) {
+  /* Секция не занимает 550vh — только авто, без scroll-jack */
+  .paw-block {
+    height: auto;
+  }
+
+  .paw-sticky {
+    position: relative;
+    height: auto;
+    min-height: unset;
+  }
+
+  /* Шапка */
+  .paw-header {
+    padding-top: 3rem;
+    text-align: left;
+    padding-bottom: 1rem;
+  }
+
+  /* Stage: колонка */
+  .paw-stage {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    align-items: start;
+  }
+
+  /* SVG меньше, по центру */
+  .paw-illustration {
+    order: -1;
+  }
+
+  .paw-svg {
+    max-width: 220px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* Контент — статическая высота, не абсолютная позиция */
+  .paw-content {
+    position: static;
+    min-height: unset;
+  }
+
+  .paw-panel {
+    position: static;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    display: none;
+    transition: none;
+  }
+
+  .paw-panel.is-active {
+    display: flex;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Кнопки навигации мобиля */
+  .paw-mobile-nav {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    align-items: center;
+  }
+
+  .paw-mobile-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-border);
+    background: transparent;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: background 200ms, border-color 200ms;
+  }
+
+  .paw-mobile-btn:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+  }
+
+  .paw-mobile-btn:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .paw-mobile-counter {
+    font-size: 0.82rem;
+    color: var(--color-text-soft);
+  }
+
+  /* Прогресс снизу — упрощённый */
+  .paw-progress {
+    position: static;
+    transform: none;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .paw-progress__track {
+    width: 100px;
+  }
+
+  .paw-scroll-hint {
+    display: none;
+  }
+
+  /* Скрываем неактивные пальцы на мобиле иначе — через SVG класс */
+  .paw-toe:not(.is-active):not(.is-done) .paw-shape {
+    fill: #e8e3d8;
+    stroke: #c8c2b0;
+  }
+
+  .paw-block {
+    padding-bottom: 0;
+  }
+
+  .paw-sticky {
+    padding-bottom: 1rem;
+  }
+}

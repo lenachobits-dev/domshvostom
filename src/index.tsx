@@ -124,6 +124,242 @@ app.get('/', (c) => {
 
       </div>
     </section>
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 4 — Пространство комплексной помощи (scroll story)
+         ═══════════════════════════════════════════════════════ -->
+    <section id="paw-section" class="paw-block" aria-label="Пространство комплексной помощи">
+
+      <!-- Sticky-контейнер: фиксируется пока идёт прокрутка истории -->
+      <div class="paw-sticky">
+
+        <!-- Заголовок секции -->
+        <div class="paw-header shell">
+          <p class="paw-overline">Наши возможности</p>
+          <h2 class="paw-heading">Пространство комплексной помощи</h2>
+          <p class="paw-subheading">От лечения до ухода — всё, что помогает животному восстановиться</p>
+        </div>
+
+        <!-- Основной layout: SVG лапа + контент -->
+        <div class="paw-stage shell">
+
+          <!-- SVG Лапа -->
+          <div class="paw-illustration" aria-hidden="true">
+            <svg class="paw-svg" viewBox="0 0 400 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Мягкий тёплый фильтр тени -->
+                <filter id="paw-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="rgba(102,115,90,0.18)" />
+                </filter>
+                <filter id="paw-shadow-active" x="-30%" y="-30%" width="160%" height="160%">
+                  <feDropShadow dx="0" dy="8" stdDeviation="20" flood-color="rgba(181,79,69,0.28)" />
+                </filter>
+              </defs>
+
+              <!-- ── ПЯТКА (heel) — центральная часть лапы ── -->
+              <g class="paw-zone paw-heel" data-zone="heel">
+                <ellipse cx="200" cy="320" rx="110" ry="100"
+                  class="paw-shape paw-heel__shape"
+                  fill="#e8e3d8" stroke="#c8c2b0" stroke-width="1.5"/>
+                <!-- Текстура — мягкие засечки -->
+                <ellipse cx="200" cy="340" rx="68" ry="52"
+                  fill="rgba(102,115,90,0.07)" />
+              </g>
+
+              <!-- ── ПАЛЕЦ 1 (левый дальний) ── -->
+              <g class="paw-zone paw-toe paw-toe--1" data-zone="toe-1" data-step="1">
+                <ellipse cx="82" cy="175" rx="42" ry="52"
+                  class="paw-shape"
+                  fill="#e8e3d8" stroke="#c8c2b0" stroke-width="1.5"
+                  transform="rotate(-18 82 175)"/>
+                <ellipse cx="82" cy="175" rx="26" ry="32"
+                  class="paw-toe__inner"
+                  fill="rgba(102,115,90,0.07)"
+                  transform="rotate(-18 82 175)"/>
+              </g>
+
+              <!-- ── ПАЛЕЦ 2 (левый ближний) ── -->
+              <g class="paw-zone paw-toe paw-toe--2" data-zone="toe-2" data-step="2">
+                <ellipse cx="152" cy="138" rx="42" ry="54"
+                  class="paw-shape"
+                  fill="#e8e3d8" stroke="#c8c2b0" stroke-width="1.5"
+                  transform="rotate(-6 152 138)"/>
+                <ellipse cx="152" cy="138" rx="26" ry="34"
+                  class="paw-toe__inner"
+                  fill="rgba(102,115,90,0.07)"
+                  transform="rotate(-6 152 138)"/>
+              </g>
+
+              <!-- ── ПАЛЕЦ 3 (правый ближний) ── -->
+              <g class="paw-zone paw-toe paw-toe--3" data-zone="toe-3" data-step="3">
+                <ellipse cx="248" cy="138" rx="42" ry="54"
+                  class="paw-shape"
+                  fill="#e8e3d8" stroke="#c8c2b0" stroke-width="1.5"
+                  transform="rotate(6 248 138)"/>
+                <ellipse cx="248" cy="138" rx="26" ry="34"
+                  class="paw-toe__inner"
+                  fill="rgba(102,115,90,0.07)"
+                  transform="rotate(6 248 138)"/>
+              </g>
+
+              <!-- ── ПАЛЕЦ 4 (правый дальний) ── -->
+              <g class="paw-zone paw-toe paw-toe--4" data-zone="toe-4" data-step="4">
+                <ellipse cx="318" cy="175" rx="42" ry="52"
+                  class="paw-shape"
+                  fill="#e8e3d8" stroke="#c8c2b0" stroke-width="1.5"
+                  transform="rotate(18 318 175)"/>
+                <ellipse cx="318" cy="175" rx="26" ry="32"
+                  class="paw-toe__inner"
+                  fill="rgba(102,115,90,0.07)"
+                  transform="rotate(18 318 175)"/>
+              </g>
+
+              <!-- ── Декоративные линии соединения пальцев с пяткой ── -->
+              <path d="M 108 220 Q 100 250 120 270" stroke="#c8c2b0" stroke-width="1" opacity="0.5" fill="none"/>
+              <path d="M 168 192 Q 168 240 168 265" stroke="#c8c2b0" stroke-width="1" opacity="0.5" fill="none"/>
+              <path d="M 232 192 Q 232 240 232 265" stroke="#c8c2b0" stroke-width="1" opacity="0.5" fill="none"/>
+              <path d="M 292 220 Q 300 250 280 270" stroke="#c8c2b0" stroke-width="1" opacity="0.5" fill="none"/>
+
+              <!-- ── Номера шагов на пальцах ── -->
+              <text x="82" y="180" text-anchor="middle" class="paw-toe-num" font-size="14" fill="rgba(102,115,90,0.5)" font-family="Nunito, sans-serif" font-weight="800" transform="rotate(-18 82 180)">1</text>
+              <text x="152" y="143" text-anchor="middle" class="paw-toe-num" font-size="14" fill="rgba(102,115,90,0.5)" font-family="Nunito, sans-serif" font-weight="800">2</text>
+              <text x="248" y="143" text-anchor="middle" class="paw-toe-num" font-size="14" fill="rgba(102,115,90,0.5)" font-family="Nunito, sans-serif" font-weight="800">3</text>
+              <text x="318" y="180" text-anchor="middle" class="paw-toe-num" font-size="14" fill="rgba(102,115,90,0.5)" font-family="Nunito, sans-serif" font-weight="800" transform="rotate(18 318 180)">4</text>
+
+              <!-- ── Центральный символ на пятке ── -->
+              <text x="200" y="330" text-anchor="middle" font-size="32" font-family="Nunito, sans-serif">🐾</text>
+            </svg>
+          </div>
+
+          <!-- Контентная зона: пятка + 4 шага -->
+          <div class="paw-content">
+
+            <!-- Пятка — вводный текст, всегда виден -->
+            <div class="paw-panel paw-panel--heel is-active" data-panel="heel">
+              <div class="paw-panel__inner">
+                <p class="paw-panel__overline">Комплексный подход</p>
+                <h3 class="paw-panel__title">Каждое животное получает полный цикл заботы</h3>
+                <p class="paw-panel__text">
+                  В нашем центре мы не ограничиваемся одной помощью. Каждый подопечный проходит
+                  через все этапы — от первичной диагностики до полного восстановления.
+                  Прокрутите вниз, чтобы узнать о каждом направлении.
+                </p>
+                <!-- Индикатор прокрутки -->
+                <div class="paw-scroll-hint">
+                  <span>Прокрутите вниз</span>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Шаг 1 — Диагностика -->
+            <div class="paw-panel paw-panel--step" data-panel="toe-1" data-step="1" aria-hidden="true">
+              <div class="paw-panel__inner">
+                <div class="paw-panel__step-badge">
+                  <span class="paw-panel__step-num">01</span>
+                  <span class="paw-panel__step-label">Шаг первый</span>
+                </div>
+                <h3 class="paw-panel__title">Диагностика и контроль состояния</h3>
+                <p class="paw-panel__text">
+                  Точная картина здоровья с первого дня. Весы, тонометр, пульсоксиметр,
+                  микроскоп и диагностическое освещение позволяют нам не упустить ни одной
+                  детали — и вовремя скорректировать лечение.
+                </p>
+                <ul class="paw-panel__list">
+                  <li><i class="fas fa-check-circle"></i> Весы и тонометр</li>
+                  <li><i class="fas fa-check-circle"></i> Пульсоксиметр</li>
+                  <li><i class="fas fa-check-circle"></i> Микроскоп</li>
+                  <li><i class="fas fa-check-circle"></i> Диагностическое освещение</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Шаг 2 — Лечение -->
+            <div class="paw-panel paw-panel--step" data-panel="toe-2" data-step="2" aria-hidden="true">
+              <div class="paw-panel__inner">
+                <div class="paw-panel__step-badge">
+                  <span class="paw-panel__step-num">02</span>
+                  <span class="paw-panel__step-label">Шаг второй</span>
+                </div>
+                <h3 class="paw-panel__title">Лечение и поддержка</h3>
+                <p class="paw-panel__text">
+                  Современное оборудование для интенсивной терапии. Инфузионный насос,
+                  кислородный концентратор и камера оксигенации обеспечивают поддержку
+                  жизненно важных функций даже в самых сложных случаях.
+                </p>
+                <ul class="paw-panel__list">
+                  <li><i class="fas fa-check-circle"></i> Инфузионный насос</li>
+                  <li><i class="fas fa-check-circle"></i> Кислородный концентратор</li>
+                  <li><i class="fas fa-check-circle"></i> Камера оксигенации</li>
+                  <li><i class="fas fa-check-circle"></i> Медицинский штатив</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Шаг 3 — Процедуры -->
+            <div class="paw-panel paw-panel--step" data-panel="toe-3" data-step="3" aria-hidden="true">
+              <div class="paw-panel__inner">
+                <div class="paw-panel__step-badge">
+                  <span class="paw-panel__step-num">03</span>
+                  <span class="paw-panel__step-label">Шаг третий</span>
+                </div>
+                <h3 class="paw-panel__title">Процедуры и клиническая работа</h3>
+                <p class="paw-panel__text">
+                  Профессиональное пространство для ежедневных процедур. Ветеринарный стол
+                  со специальным освещением, носилки для безопасной транспортировки и
+                  ультразвуковой скалер для стоматологии.
+                </p>
+                <ul class="paw-panel__list">
+                  <li><i class="fas fa-check-circle"></i> Ветеринарный стол и светильник</li>
+                  <li><i class="fas fa-check-circle"></i> Носилки</li>
+                  <li><i class="fas fa-check-circle"></i> Ультразвуковой скалер</li>
+                  <li><i class="fas fa-check-circle"></i> Специальный резиновый коврик</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Шаг 4 — Уход -->
+            <div class="paw-panel paw-panel--step" data-panel="toe-4" data-step="4" aria-hidden="true">
+              <div class="paw-panel__inner">
+                <div class="paw-panel__step-badge">
+                  <span class="paw-panel__step-num">04</span>
+                  <span class="paw-panel__step-label">Шаг четвёртый</span>
+                </div>
+                <h3 class="paw-panel__title">Уход и реабилитация</h3>
+                <p class="paw-panel__text">
+                  Полное восстановление требует комфорта и тепла. Груминг-стол, ванна,
+                  фен-компрессор и матрац с подогревом создают среду, в которой животное
+                  расслабляется и набирается сил.
+                </p>
+                <ul class="paw-panel__list">
+                  <li><i class="fas fa-check-circle"></i> Груминг-стол и стул грумера</li>
+                  <li><i class="fas fa-check-circle"></i> Ванна и фен-компрессор</li>
+                  <li><i class="fas fa-check-circle"></i> Машинка и ножницы</li>
+                  <li><i class="fas fa-check-circle"></i> Матрац с подогревом</li>
+                </ul>
+              </div>
+            </div>
+
+          </div><!-- /.paw-content -->
+        </div><!-- /.paw-stage -->
+
+        <!-- Индикатор прогресса — 4 точки -->
+        <div class="paw-progress" aria-hidden="true">
+          <div class="paw-progress__track">
+            <div class="paw-progress__bar" id="paw-progress-bar"></div>
+          </div>
+          <div class="paw-progress__dots">
+            <button class="paw-dot" data-step="1" aria-label="Шаг 1: Диагностика"></button>
+            <button class="paw-dot" data-step="2" aria-label="Шаг 2: Лечение"></button>
+            <button class="paw-dot" data-step="3" aria-label="Шаг 3: Процедуры"></button>
+            <button class="paw-dot" data-step="4" aria-label="Шаг 4: Уход"></button>
+          </div>
+        </div>
+
+      </div><!-- /.paw-sticky -->
+    </section>
+
     <section id="directions-section" class="directions-block reveal-up">
       <div class="directions-header shell">
         <div class="directions-header__text">
