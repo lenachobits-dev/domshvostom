@@ -456,6 +456,172 @@ app.get('/', (c) => {
     </section>
   </main>
 
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 5 — «Вы можете стать частью этой истории»
+         Postcard collage: 5 способов помочь
+         ═══════════════════════════════════════════════════════ -->
+    <section id="postcard-section" class="pc-stage" aria-labelledby="pc-title">
+
+      <!-- Doodles (декоративные SVG) -->
+      <svg class="pc-doodle pc-doodle--arrow" viewBox="0 0 130 40" fill="none" aria-hidden="true">
+        <path d="M4 22 Q 40 4 78 18 T 122 20" stroke="#B54F45" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M122 20 l -10 -6 M122 20 l -6 8" stroke="#B54F45" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <svg class="pc-doodle pc-doodle--heart" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+        <path d="M30 52 C 8 38 4 20 16 12 C 24 7 30 14 30 18 C 30 14 36 7 44 12 C 56 20 52 38 30 52 Z" stroke="#66735A" stroke-width="2" fill="none"/>
+      </svg>
+      <svg class="pc-doodle pc-doodle--stars" viewBox="0 0 90 60" fill="none" aria-hidden="true">
+        <path d="M12 12 l 4 8 l 8 2 l -6 6 l 2 8 l -8 -4 l -8 4 l 2 -8 l -6 -6 l 8 -2 z" stroke="#66735A" stroke-width="1.5"/>
+        <path d="M60 40 l 3 6 l 6 1 l -4 5 l 1 6 l -6 -3 l -6 3 l 1 -6 l -4 -5 l 6 -1 z" stroke="#66735A" stroke-width="1.5"/>
+      </svg>
+      <svg class="pc-doodle pc-doodle--scribble" viewBox="0 0 140 60" fill="none" aria-hidden="true">
+        <path d="M4 30 Q 20 4 40 30 T 80 30 T 120 30 T 138 30" stroke="#B54F45" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+
+      <!-- Шапка секции -->
+      <div class="pc-header shell">
+        <div class="pc-header__left">
+          <div class="pc-eyebrow">Как помочь · Открытка из приюта</div>
+          <h2 class="pc-title" id="pc-title">
+            Вы можете стать<br><span class="pc-hand">частью</span> этой истории
+          </h2>
+        </div>
+        <div class="pc-header__right">
+          <div class="pc-postmark" aria-hidden="true">
+            <span>Дом с хвостом</span>
+            <span>с любовью</span>
+            <span>2026</span>
+          </div>
+          <p class="pc-lead">
+            Пять простых способов быть рядом. Выберите тот, что откликается —
+            <b>каждый шаг превращается в чью-то новую жизнь.</b>
+          </p>
+        </div>
+      </div>
+
+      <!-- Доска с карточками -->
+      <div class="pc-board">
+
+        <!-- 01 — Пожертвование -->
+        <article class="pc-card pc-card--donate">
+          <span class="pc-tape pc-tape--corner-tl" aria-hidden="true"></span>
+          <span class="pc-sticky pc-sticky--donate" aria-hidden="true">спасибо!</span>
+          <div class="pc-card__img">
+            <img src="/static/pc-breloki.jpg" alt="Брелоки с логотипом Дом с хвостом" loading="lazy" decoding="async"/>
+          </div>
+          <div class="pc-card__meta">
+            <div class="pc-card__num">01 · пожертвование</div>
+            <h3 class="pc-card__title">Сделать пожертвование</h3>
+            <p class="pc-card__desc">Даже небольшой регулярный вклад помогает спасать жизни и строить устойчивую систему помощи.</p>
+            <span class="pc-cta">Помочь регулярно
+              <span class="pc-cta__arrow" aria-hidden="true">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h7M5 1l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </span>
+          </div>
+        </article>
+
+        <!-- 02 — Волонтёрство -->
+        <article class="pc-card pc-card--volunteer">
+          <span class="pc-tape" aria-hidden="true"></span>
+          <span class="pc-sticky pc-sticky--volunteer" aria-hidden="true">приезжай к нам ♡</span>
+          <div class="pc-card__img pc-card__img--square">
+            <img src="/static/pc-nastya.jpg" alt="Волонтёр с белой собакой на фестивале" loading="lazy" decoding="async"/>
+          </div>
+          <div class="pc-card__meta">
+            <div class="pc-card__num">02 · волонтёрство</div>
+            <h3 class="pc-card__title">Стать волонтёром</h3>
+            <p class="pc-card__desc">Приехать, помочь руками, делом, временем, участием, знаниями и теплом.</p>
+            <span class="pc-cta">Записаться
+              <span class="pc-cta__arrow" aria-hidden="true">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h7M5 1l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </span>
+          </div>
+        </article>
+
+        <!-- 04 — Партнёрство (широкая горизонтальная) -->
+        <article class="pc-card pc-card--partner">
+          <span class="pc-tape pc-tape--right" aria-hidden="true"></span>
+          <span class="pc-pin pc-pin--sage pc-pin--tl" aria-hidden="true"></span>
+          <span class="pc-sticky pc-sticky--partner" aria-hidden="true">вместе ×</span>
+          <div class="pc-card__layout">
+            <div class="pc-card__img pc-card__img--wide">
+              <img src="/static/pc-meksikancy.jpg" alt="Три мексиканские голые собаки рядом с подарками для приюта" loading="lazy" decoding="async"/>
+            </div>
+            <div class="pc-card__meta pc-card__meta--centered">
+              <div class="pc-card__num">04 · партнёрство</div>
+              <h3 class="pc-card__title pc-card__title--lg">Стать партнёром</h3>
+              <p class="pc-card__desc">Проект открыт к сотрудничеству с бизнесом, специалистами, фондами и социально ответственными инициативами.</p>
+              <span class="pc-cta">Обсудить проект
+                <span class="pc-cta__arrow" aria-hidden="true">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h7M5 1l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Hero banner — строительство -->
+        <div class="pc-hero-build">
+          <span class="pc-hero-build__badge">главная миссия</span>
+          <span class="pc-hero-build__kicker">и самое большое —</span>
+          <h3 class="pc-hero-build__title">Поддержать строительство центра помощи</h3>
+          <p class="pc-hero-build__desc">Это вклад не в одну историю, а в место, которое будет помогать животным долгие годы. Каждый рубль приближает открытие.</p>
+          <div class="pc-hero-build__row">
+            <a href="#" class="pc-hero-build__btn">Поддержать стройку
+              <span class="pc-hero-build__btn-arrow" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M1 5h7M5 1l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <div class="pc-hero-build__progress">
+              Собрано <b>476 000 ₽</b> из 50 000 000 ₽
+              <div class="pc-hero-build__bar"><i style="width:0.95%"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 — Рассказать -->
+        <article class="pc-card pc-card--share">
+          <span class="pc-pin pc-pin--red pc-pin--top" aria-hidden="true"></span>
+          <span class="pc-sticky pc-sticky--share" aria-hidden="true">расскажи!</span>
+          <div class="pc-card__img">
+            <img src="/static/pc-para.jpg" alt="Девушка держит листовку о проекте" loading="lazy" decoding="async"/>
+          </div>
+          <div class="pc-card__meta">
+            <div class="pc-card__num">03 · рассказать</div>
+            <h3 class="pc-card__title">Рассказать о проекте</h3>
+            <p class="pc-card__desc">Иногда один репост, одно знакомство или одна рекомендация приводят к настоящему спасению.</p>
+            <span class="pc-cta">Поделиться
+              <span class="pc-cta__arrow" aria-hidden="true">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h7M5 1l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </span>
+          </div>
+        </article>
+
+        <!-- 05 — Строительство (маленькая) -->
+        <article class="pc-card pc-card--build">
+          <span class="pc-tape" aria-hidden="true"></span>
+          <div class="pc-card__img pc-card__img--tall">
+            <img src="/static/pc-lera.jpg" alt="Пара с чёрной собакой и табличкой истории Кайли" loading="lazy" decoding="async"/>
+          </div>
+          <div class="pc-card__meta">
+            <div class="pc-card__num">05 · центр</div>
+            <h3 class="pc-card__title">Дом, который останется</h3>
+            <p class="pc-card__desc">Мы строим постоянный центр помощи — место, куда можно приехать, помочь и найти друга.</p>
+          </div>
+        </article>
+
+      </div><!-- /.pc-board -->
+
+      <!-- Подвал секции -->
+      <div class="pc-foot shell">
+        <span class="pc-foot__thanks">спасибо, что дочитали — это уже участие ♡</span>
+      </div>
+
+    </section>
+
   <script src="/static/app.js" defer></script>
 </body>
 </html>`)

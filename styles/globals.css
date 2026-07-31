@@ -1358,3 +1358,634 @@ body {
     padding-bottom: 1rem;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   POSTCARD SECTION — "Вы можете стать частью этой истории"
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─── Tokens ──────────────────────────────────────────────── */
+#postcard-section {
+  --pc-secondary:     #F0E6D8;
+  --pc-secondary-deep:#E7D9C4;
+  --pc-paper:         #FBF5EA;
+  --pc-primary:       #66735A;
+  --pc-primary-soft:  #8A9578;
+  --pc-primary-ink:   #3D4634;
+  --pc-accent:        #B54F45;
+  --pc-accent-soft:   #C86A5F;
+  --pc-tape:          rgba(230,210,140,0.55);
+  --pc-tape-edge:     rgba(210,180,90,0.35);
+  --pc-shadow-soft:   0 18px 30px -18px rgba(61,70,52,0.35), 0 4px 8px -4px rgba(61,70,52,0.25);
+  --pc-shadow-lift:   0 40px 60px -25px rgba(61,70,52,0.5), 0 10px 18px -8px rgba(61,70,52,0.3);
+}
+
+/* ─── Stage (секция-контейнер) ────────────────────────────── */
+.pc-stage {
+  position: relative;
+  padding: 90px 64px 120px;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 600px at 85% 8%, rgba(102,115,90,0.09), transparent 60%),
+    radial-gradient(900px 500px at 8% 90%, rgba(181,79,69,0.06), transparent 60%),
+    #F0E6D8;
+  color: #3D4634;
+  font-family: 'Nunito Sans', system-ui, sans-serif;
+}
+
+/* Paper grain texture */
+.pc-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(102,115,90,0.045) 1px, transparent 1px),
+    radial-gradient(rgba(102,115,90,0.03)  1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+  pointer-events: none;
+  opacity: .7;
+  z-index: 0;
+}
+
+/* ─── Decorative doodles ──────────────────────────────────── */
+.pc-doodle {
+  position: absolute;
+  pointer-events: none;
+  opacity: .55;
+}
+.pc-doodle--arrow   { top: 210px; left: 500px; width: 130px; transform: rotate(-14deg); }
+.pc-doodle--heart   { top: 90px;  right: 90px; width: 60px; }
+.pc-doodle--stars   { bottom: 140px; left: 8%;  width: 90px; opacity: .4; }
+.pc-doodle--scribble{ bottom: 80px; right: 12%; width: 140px; opacity: .35; }
+
+/* ─── Header ──────────────────────────────────────────────── */
+.pc-header {
+  position: relative;
+  z-index: 3;
+  max-width: 1180px;
+  margin: 0 auto 40px;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 32px;
+  align-items: end;
+}
+
+.pc-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #66735A;
+  margin-bottom: 18px;
+}
+.pc-eyebrow::before {
+  content: "";
+  width: 38px;
+  height: 2px;
+  background: #66735A;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.pc-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: clamp(40px, 5.2vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: #3D4634;
+  margin: 0;
+}
+
+/* Рукописное слово «частью» */
+.pc-hand {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  color: #B54F45;
+  font-size: 1.15em;
+  line-height: .9;
+  display: inline-block;
+  transform: rotate(-3deg) translateY(6px);
+  padding: 0 6px;
+  position: relative;
+}
+.pc-hand::after {
+  content: "";
+  position: absolute;
+  left: 6%; right: 6%;
+  bottom: 8px;
+  height: 10px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'><path d='M2 8 Q 30 2 60 7 T 120 6 T 198 5' fill='none' stroke='%23B54F45' stroke-width='2.5' stroke-linecap='round'/></svg>") no-repeat center/100% 100%;
+  opacity: .9;
+}
+
+/* Правая колонка хедера */
+.pc-header__right {
+  position: relative;
+}
+
+.pc-postmark {
+  position: absolute;
+  top: -110px;
+  right: 20px;
+  width: 118px;
+  height: 118px;
+  border: 2px dashed #B54F45;
+  border-radius: 50%;
+  color: #B54F45;
+  display: grid;
+  place-items: center;
+  transform: rotate(-12deg);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  text-align: center;
+  padding: 8px;
+  line-height: 1;
+  opacity: .85;
+}
+.pc-postmark__line1 { font-size: 11px; letter-spacing: .12em; display: block; }
+.pc-postmark__line2 { font-family: 'Caveat', cursive; font-weight: 700; font-size: 34px; margin: 4px 0; display: block; }
+.pc-postmark__line3 { font-size: 10px; letter-spacing: .1em; display: block; }
+
+.pc-lead {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #66735A;
+  max-width: 460px;
+  padding-bottom: 6px;
+  margin: 0;
+}
+.pc-lead b {
+  color: #3D4634;
+  font-weight: 700;
+}
+
+/* ─── Board (коллаж) ──────────────────────────────────────── */
+.pc-board {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto;
+  gap: 0;
+  align-items: start;
+}
+
+/* ─── Base card ───────────────────────────────────────────── */
+.pc-card {
+  position: relative;
+  background: #FBF5EA;
+  padding: 14px 14px 18px;
+  box-shadow: 0 18px 30px -18px rgba(61,70,52,0.35), 0 4px 8px -4px rgba(61,70,52,0.25);
+  transition: transform .5s cubic-bezier(.2,.7,.2,1),
+              box-shadow .5s cubic-bezier(.2,.7,.2,1);
+  cursor: pointer;
+  will-change: transform;
+  text-decoration: none;
+  color: inherit;
+}
+.pc-card:hover {
+  transform: rotate(0deg) translateY(-6px) scale(1.015) !important;
+  box-shadow: 0 40px 60px -25px rgba(61,70,52,0.5), 0 10px 18px -8px rgba(61,70,52,0.3);
+  z-index: 20;
+}
+
+/* Изображение внутри карточки */
+.pc-card__img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #d9cfbb;
+  position: relative;
+  border-radius: 2px;
+}
+.pc-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.02) contrast(1.02);
+  transition: transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.pc-card:hover .pc-card__img img {
+  transform: scale(1.04);
+}
+.pc-card__img--tall { aspect-ratio: 3/3.7; }
+
+/* Горизонтальный лейаут партнёра */
+.pc-card__layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Мета-блок */
+.pc-card__meta {
+  padding: 12px 4px 2px;
+}
+.pc-card__meta--centered {
+  padding: 12px 8px 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pc-card__num {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  color: #B54F45;
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.pc-card__title {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.15;
+  color: #3D4634;
+  margin-bottom: 8px;
+  letter-spacing: -0.005em;
+  margin-top: 0;
+}
+.pc-card__title--lg { font-size: 22px; }
+.pc-card__desc {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #5a6350;
+  margin: 0;
+}
+
+/* ─── CTA ссылка ──────────────────────────────────────────── */
+.pc-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #B54F45;
+  letter-spacing: .01em;
+  text-decoration: none;
+}
+.pc-cta__arrow {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #B54F45;
+  color: #FFF5EA;
+  display: grid;
+  place-items: center;
+  transition: transform .35s ease;
+  flex-shrink: 0;
+}
+.pc-card:hover .pc-cta__arrow {
+  transform: translateX(4px);
+}
+
+/* ─── Tape (скотч) ────────────────────────────────────────── */
+.pc-tape {
+  position: absolute;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0) 40%),
+    rgba(230,210,140,0.55);
+  box-shadow:
+    inset 0 0 0 1px rgba(210,180,90,0.35),
+    0 4px 8px -6px rgba(0,0,0,.25);
+  width: 110px;
+  height: 26px;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  z-index: 3;
+  opacity: .95;
+}
+.pc-tape::before,
+.pc-tape::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 6px;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0 3px,
+    rgba(0,0,0,.06) 3px 4px
+  );
+}
+.pc-tape::before { left: 0; }
+.pc-tape::after  { right: 0; }
+
+/* Угловой скотч (левый верхний угол) */
+.pc-tape--corner-tl {
+  top: -10px;
+  left: -14px;
+  transform: rotate(-32deg);
+  width: 74px;
+}
+
+/* ─── Sticky note ─────────────────────────────────────────── */
+.pc-sticky {
+  position: absolute;
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  color: #3D4634;
+  font-size: 26px;
+  line-height: .95;
+  padding: 4px 8px;
+  background: transparent;
+  z-index: 4;
+  pointer-events: none;
+}
+.pc-sticky--donate    { top: -18px; left: -18px; transform: rotate(-14deg); color: #B54F45; }
+.pc-sticky--volunteer { bottom: -22px; right: -8px; transform: rotate(-6deg); font-size: 30px; }
+.pc-sticky--partner   { top: -6px; right: 8%; transform: rotate(-2deg); font-size: 30px; color: #66735A; }
+.pc-sticky--share     { top: -14px; left: -12px; transform: rotate(-12deg); color: #B54F45; }
+.pc-sticky--build     { bottom: -14px; left: -6px; transform: rotate(-6deg); color: #66735A; }
+
+/* ─── Pin/кнопка ──────────────────────────────────────────── */
+.pc-pin {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #d67266, #B54F45 55%, #7a2f28);
+  box-shadow: 0 3px 6px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.15);
+  z-index: 5;
+}
+.pc-pin--top    { top: -8px; left: 50%; transform: translateX(-50%); }
+.pc-pin--tl     { top: -8px; left: 14px; }
+.pc-pin--tr     { top: -8px; right: 14px; }
+.pc-pin--red    { /* default accent — already applied */ }
+.pc-pin--blue   { background: radial-gradient(circle at 35% 30%, #a5b598, #66735A 55%, #3d4634); }
+
+/* ─── Индивидуальные позиции карточек ─────────────────────── */
+
+/* 01 — Пожертвование */
+.pc-card--donate {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+  transform: rotate(-4.2deg);
+  margin-top: 10px;
+  margin-right: 14px;
+  z-index: 4;
+}
+.pc-card--donate .pc-card__img { aspect-ratio: 3/4.2; }
+
+/* 02 — Волонтёр */
+.pc-card--volunteer {
+  grid-column: 4 / span 3;
+  grid-row: 1;
+  transform: rotate(2.3deg);
+  margin-top: 60px;
+  margin-left: 14px;
+  z-index: 3;
+}
+.pc-card--volunteer .pc-card__img { aspect-ratio: 1/1.15; }
+
+/* 03 — Партнёр (широкая карточка) */
+.pc-card--partner {
+  grid-column: 7 / span 6;
+  grid-row: 1;
+  transform: rotate(-1.8deg);
+  margin-left: 20px;
+  align-self: start;
+}
+.pc-card--partner .pc-card__img { aspect-ratio: 3/2; }
+.pc-card--partner .pc-card__meta {
+  padding: 6px 8px 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Hero build banner */
+.pc-hero-build {
+  grid-column: 1 / span 6;
+  grid-row: 2;
+  align-self: end;
+  transform: rotate(-0.8deg);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.35), transparent 30%),
+    #B54F45;
+  color: #FBF5EA;
+  padding: 26px 30px 28px;
+  box-shadow: 0 18px 30px -18px rgba(61,70,52,0.35), 0 4px 8px -4px rgba(61,70,52,0.25);
+  margin-top: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: transform .5s cubic-bezier(.2,.7,.2,1),
+              box-shadow .5s cubic-bezier(.2,.7,.2,1);
+}
+.pc-hero-build:hover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 0 40px 60px -25px rgba(61,70,52,0.5), 0 10px 18px -8px rgba(61,70,52,0.3);
+}
+
+.pc-hero-build__badge {
+  position: absolute;
+  top: -20px;
+  right: 26px;
+  background: #FBF5EA;
+  color: #B54F45;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .18em;
+  padding: 8px 14px;
+  border-radius: 40px;
+  transform: rotate(4deg);
+  box-shadow: 0 18px 30px -18px rgba(61,70,52,0.35), 0 4px 8px -4px rgba(61,70,52,0.25);
+}
+.pc-hero-build__kicker {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 30px;
+  color: #FFE8CF;
+  line-height: 1;
+  margin-bottom: 8px;
+  display: inline-block;
+  transform: rotate(-1.5deg);
+}
+.pc-hero-build__title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 1.05;
+  margin: 0 0 12px;
+  max-width: 480px;
+  letter-spacing: -0.01em;
+}
+.pc-hero-build__desc {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 460px;
+  color: #FBEDDA;
+  opacity: .92;
+  margin: 0;
+}
+.pc-hero-build__row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.pc-hero-build__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #FBF5EA;
+  color: #B54F45;
+  padding: 14px 22px;
+  border-radius: 40px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  box-shadow: 0 6px 14px -6px rgba(0,0,0,.3);
+  transition: transform .3s ease;
+  white-space: nowrap;
+}
+.pc-hero-build__btn:hover { transform: translateY(-2px); }
+.pc-hero-build__btn-arrow {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #B54F45;
+  color: #FBF5EA;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.pc-hero-build__progress {
+  flex: 1;
+  max-width: 320px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FBEDDA;
+}
+.pc-hero-build__bar {
+  height: 6px;
+  background: rgba(251,245,234,.28);
+  border-radius: 30px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.pc-hero-build__bar i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #FFE8CF, #FBF5EA);
+  border-radius: 30px;
+}
+
+/* 04 — Рассказать */
+.pc-card--share {
+  grid-column: 7 / span 3;
+  grid-row: 2;
+  transform: rotate(3.6deg);
+  margin-top: 40px;
+  margin-left: 20px;
+  margin-right: 14px;
+  z-index: 3;
+}
+.pc-card--share .pc-card__img { aspect-ratio: 3/4; }
+
+/* 05 — Строительство */
+.pc-card--build {
+  grid-column: 10 / span 3;
+  grid-row: 2;
+  transform: rotate(-2.4deg);
+  margin-top: 20px;
+  margin-left: 14px;
+  z-index: 4;
+}
+.pc-card--build .pc-card__img { aspect-ratio: 3/3.7; }
+
+/* ─── Footer секции ───────────────────────────────────────── */
+.pc-foot {
+  position: relative;
+  z-index: 3;
+  max-width: 1180px;
+  margin: 90px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 28px;
+  border-top: 1px dashed rgba(102,115,90,.35);
+}
+.pc-foot__thanks {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 34px;
+  color: #66735A;
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+/* ═══ Responsive ══════════════════════════════════════════════ */
+
+/* Планшет — 6 колонок */
+@media (max-width: 1100px) {
+  .pc-stage { padding: 70px 32px 90px; }
+
+  .pc-board {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .pc-card--donate    { grid-column: 1 / span 3; grid-row: auto; }
+  .pc-card--volunteer { grid-column: 4 / span 3; grid-row: auto; margin-top: 0; }
+  .pc-card--partner   { grid-column: 1 / span 6; grid-row: auto; margin-left: 0; }
+  .pc-card--share     { grid-column: 1 / span 3; grid-row: auto; margin-top: 0; margin-left: 0; }
+  .pc-card--build     { grid-column: 4 / span 3; grid-row: auto; margin-top: 0; margin-left: 0; }
+  .pc-hero-build      { grid-column: 1 / span 6; grid-row: auto; margin-top: 24px; }
+
+  .pc-doodle--arrow   { left: 300px; }
+}
+
+/* Мобильный — колонки убираем, flex */
+@media (max-width: 680px) {
+  .pc-stage { padding: 60px 20px 80px; }
+
+  .pc-header {
+    grid-template-columns: 1fr;
+  }
+  .pc-postmark { display: none; }
+
+  .pc-board {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .pc-card,
+  .pc-hero-build {
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  .pc-card__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pc-card--partner .pc-card__img { aspect-ratio: 4/3; }
+
+  .pc-doodle--arrow,
+  .pc-doodle--scribble { display: none; }
+
+  .pc-foot { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .pc-foot__thanks { font-size: 26px; }
+}
