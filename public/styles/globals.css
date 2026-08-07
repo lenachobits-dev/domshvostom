@@ -1989,3 +1989,424 @@ body {
   .pc-foot { flex-direction: column; align-items: flex-start; gap: 12px; }
   .pc-foot__thanks { font-size: 26px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   SITE FOOTER — "Давайте знакомиться"
+   ══════════════════════════════════════════════════════════════ */
+
+.site-footer {
+  --ft-ink-deep:   #1F241B;
+  --ft-ink:        #2A3025;
+  --ft-ink-soft:   #3A4234;
+  --ft-ink-line:   rgba(240,230,216,0.12);
+  --ft-cream:      #F0E6D8;
+  --ft-cream-soft: rgba(240,230,216,0.68);
+  --ft-sage:       #B7C3A6;
+  --ft-accent:     #B54F45;
+  --ft-tape:       rgba(230,210,140,0.55);
+  --ft-tape-edge:  rgba(210,180,90,0.35);
+
+  position: relative;
+  background: var(--ft-ink-deep);
+  color: var(--ft-cream);
+  padding: 90px 64px 40px;
+  overflow: hidden;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+/* Бумажная зернистость на тёмном фоне */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(240,230,216,0.035) 1px, transparent 1px),
+    radial-gradient(rgba(240,230,216,0.022) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+  pointer-events: none;
+  opacity: .9;
+  z-index: 0;
+}
+
+/* Тёплое свечение снизу слева */
+.site-footer::after {
+  content: "";
+  position: absolute;
+  left: -10%; bottom: -30%;
+  width: 60%; height: 80%;
+  background: radial-gradient(closest-side, rgba(181,79,69,0.14), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Inner grid ──────────────────────────────────────────── */
+.footer-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 1.15fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* ─── Left column ─────────────────────────────────────────── */
+.footer-lead { /* container */ }
+
+.ft-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ft-sage);
+  margin-bottom: 20px;
+}
+.ft-eyebrow::before {
+  content: "";
+  width: 38px;
+  height: 2px;
+  background: var(--ft-sage);
+  border-radius: 2px;
+  opacity: .9;
+  flex-shrink: 0;
+}
+
+.ft-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: clamp(44px, 4.4vw, 68px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--ft-cream);
+  margin: 0 0 22px;
+}
+.ft-hand {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  color: var(--ft-accent);
+  font-size: 0.92em;
+  line-height: .9;
+  display: inline-block;
+  transform: rotate(-3deg) translateY(4px);
+  margin-left: 6px;
+}
+
+.ft-lead {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ft-cream-soft);
+  max-width: 440px;
+  margin: 0 0 32px;
+}
+
+/* Поляроид с собакой */
+.footer-portrait {
+  position: relative;
+  display: inline-block;
+  transform: rotate(-3deg);
+  margin-top: 12px;
+  padding: 12px 12px 16px;
+  background: #FBF5EA;
+  box-shadow:
+    0 24px 40px -20px rgba(0,0,0,.55),
+    0 8px 12px -6px rgba(0,0,0,.4);
+  max-width: 300px;
+}
+.fp-tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 110px;
+  height: 26px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0) 40%),
+    var(--ft-tape);
+  box-shadow:
+    inset 0 0 0 1px var(--ft-tape-edge),
+    0 4px 8px -6px rgba(0,0,0,.55);
+  opacity: .96;
+  display: block;
+}
+.fp-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #2a3025;
+}
+.fp-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.05) contrast(1.02);
+}
+.fp-cap {
+  display: block;
+  margin-top: 10px;
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 22px;
+  text-align: center;
+  color: #3D4634;
+  line-height: 1;
+}
+
+/* ─── Right column ────────────────────────────────────────── */
+.footer-socials {
+  padding-top: 6px;
+}
+
+.ft-kicker {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  color: var(--ft-accent);
+  font-size: 26px;
+  line-height: 1;
+  display: inline-block;
+  transform: rotate(-2deg);
+  margin-bottom: 14px;
+}
+.ft-socials-title {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  color: var(--ft-cream);
+  margin: 0 0 28px;
+}
+
+/* Сетка карточек соцсетей */
+.ft-socials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  max-width: 520px;
+}
+
+.ft-social {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 24px;
+  background: var(--ft-ink);
+  text-decoration: none;
+  color: var(--ft-cream);
+  border: 1px solid var(--ft-ink-line);
+  border-radius: 18px;
+  transition:
+    transform .35s cubic-bezier(.2,.7,.2,1),
+    background .35s ease,
+    border-color .35s ease;
+  position: relative;
+  overflow: hidden;
+}
+.ft-social::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(181,79,69,0), rgba(181,79,69,.18));
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.ft-social:hover {
+  transform: translateY(-4px);
+  background: var(--ft-ink-soft);
+  border-color: rgba(181,79,69,.4);
+}
+.ft-social:hover::after { opacity: 1; }
+.ft-social:hover .ft-social__icon {
+  background: var(--ft-accent);
+  color: #FBF5EA;
+  transform: rotate(-6deg);
+}
+.ft-social:hover .ft-social__arrow {
+  transform: translate(3px,-3px);
+  color: var(--ft-accent);
+}
+
+.ft-social__icon {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(240,230,216,0.08);
+  color: var(--ft-cream);
+  transition: background .35s ease, color .35s ease, transform .35s cubic-bezier(.2,.7,.2,1);
+}
+.ft-social__icon svg { width: 26px; height: 26px; display: block; }
+
+.ft-social__txt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.2;
+}
+.ft-social__label {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--ft-cream);
+  letter-spacing: -0.005em;
+}
+.ft-social__hint {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ft-cream-soft);
+}
+.ft-social__arrow {
+  margin-left: auto;
+  color: var(--ft-cream-soft);
+  transition: transform .35s ease, color .35s ease;
+  flex-shrink: 0;
+}
+.ft-social__arrow svg { width: 16px; height: 16px; display: block; }
+
+/* ─── Прямые контакты ─────────────────────────────────────── */
+.ft-direct {
+  margin-top: 42px;
+  max-width: 520px;
+  padding-top: 30px;
+  border-top: 1px dashed rgba(240,230,216,0.15);
+}
+.ft-direct__kicker {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  color: var(--ft-sage);
+  font-size: 24px;
+  line-height: 1;
+  display: inline-block;
+  transform: rotate(-2deg);
+  margin-bottom: 20px;
+}
+.ft-direct__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ft-direct__item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 4px;
+  border-bottom: 1px solid rgba(240,230,216,0.08);
+}
+.ft-direct__item:last-child { border-bottom: none; }
+
+.ft-direct__ico {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(240,230,216,0.06);
+  color: var(--ft-sage);
+  transition: background .3s ease, color .3s ease;
+}
+.ft-direct__ico svg { width: 20px; height: 20px; }
+.ft-direct__item:hover .ft-direct__ico {
+  background: rgba(181,79,69,0.18);
+  color: var(--ft-accent);
+}
+.ft-direct__txt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.25;
+}
+.ft-direct__label {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ft-cream-soft);
+  letter-spacing: 0.02em;
+}
+.ft-direct__value {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ft-cream);
+  text-decoration: none;
+  letter-spacing: -0.005em;
+  transition: color .25s ease;
+}
+a.ft-direct__value:hover { color: var(--ft-accent); }
+
+/* ─── Bottom bar ──────────────────────────────────────────── */
+.ft-bottom {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 90px auto 0;
+  padding-top: 26px;
+  border-top: 1px dashed rgba(240,230,216,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ft-cream-soft);
+}
+.ft-bottom__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--ft-cream);
+  letter-spacing: .02em;
+}
+.ft-bottom__paw {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.ft-bottom__paw img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* ═══ Responsive ══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .site-footer { padding: 70px 32px 32px; }
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .ft-socials-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer { padding: 60px 20px 28px; }
+  .ft-social { padding: 18px 18px; gap: 14px; }
+  .ft-social__icon { width: 46px; height: 46px; }
+  .ft-lead { font-size: 16px; }
+  .ft-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
