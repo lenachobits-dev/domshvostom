@@ -14,6 +14,8 @@ app.get('/', (c) => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Дом с Хвостом</title>
   <meta name="description" content="АНО Дом с Хвостом — центр реабилитации бездомных животных в Уфе." />
+  <link rel="icon" type="image/svg+xml" href="/static/paw-logo.svg" />
+  <meta property="og:image" content="/static/pc-dog-cards.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Nunito+Sans:wght@400;600&family=Nunito:wght@800&display=swap" rel="stylesheet">
