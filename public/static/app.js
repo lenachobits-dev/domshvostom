@@ -1,3 +1,76 @@
+/* ═══════════════════════════════════════════════════════════
+   SITE HEADER — бургер-меню + активный пункт навигации
+   ═══════════════════════════════════════════════════════════ */
+;(function () {
+  const btn   = document.getElementById('menu-btn')
+  const nav   = document.getElementById('site-nav')
+  if (!btn || !nav) return
+
+  const NAV_ITEMS = [
+    { href: '#about-section' },
+    { href: '#directions-section' },
+    { href: '#grant-section' },
+    { href: '#territory-section' },
+    { href: '#postcard-section' },
+    { href: '#founder-section' },
+    { href: '#acquainted-section' },
+  ]
+
+  /* --- Toggle меню --- */
+  btn.addEventListener('click', () => {
+    const isOpen = btn.classList.toggle('is-open')
+    nav.classList.toggle('is-open', isOpen)
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
+    btn.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню')
+  })
+
+  /* Закрывать при клике на ссылку */
+  nav.querySelectorAll('.site-nav__link').forEach(link => {
+    link.addEventListener('click', () => {
+      btn.classList.remove('is-open')
+      nav.classList.remove('is-open')
+      btn.setAttribute('aria-expanded', 'false')
+      btn.setAttribute('aria-label', 'Открыть меню')
+    })
+  })
+
+  /* Закрывать при клике вне шапки */
+  document.addEventListener('click', (e) => {
+    const header = document.getElementById('site-header')
+    if (header && !header.contains(e.target)) {
+      btn.classList.remove('is-open')
+      nav.classList.remove('is-open')
+      btn.setAttribute('aria-expanded', 'false')
+      btn.setAttribute('aria-label', 'Открыть меню')
+    }
+  })
+
+  /* --- Активный пункт по скроллу --- */
+  const links = Array.from(nav.querySelectorAll('.site-nav__link'))
+
+  const updateActive = () => {
+    const probe = window.innerHeight / 3
+    let current = ''
+    NAV_ITEMS.forEach(item => {
+      const el = document.querySelector(item.href)
+      if (!el) return
+      if (el.getBoundingClientRect().top <= probe) current = item.href
+    })
+    links.forEach(link => {
+      link.classList.toggle('is-active', link.getAttribute('href') === current)
+    })
+  }
+
+  let ticking = false
+  window.addEventListener('scroll', () => {
+    if (ticking) return
+    ticking = true
+    requestAnimationFrame(() => { updateActive(); ticking = false })
+  }, { passive: true })
+  window.addEventListener('resize', updateActive)
+  updateActive()
+})()
+
 /* ─── Reveal on scroll ────────────────────────────────────── */
 const revealItems = document.querySelectorAll('.reveal-up')
 

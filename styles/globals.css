@@ -3353,3 +3353,156 @@ a.ft-direct__value:hover { color: var(--ft-accent); }
   .yuliana-slider__visual { order: -1; }
   .yuliana-slider__img { height: clamp(240px, 55vw, 380px); }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SITE HEADER — шапка сайта
+   ═══════════════════════════════════════════════════════════ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background: var(--color-portfolio-secondary, #ffffff);
+  border-bottom: 1px solid rgba(102, 115, 90, 0.12);
+}
+
+.site-header__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+}
+
+/* Логотип */
+.site-header__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-portfolio-primary, #66735a);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.site-header__logo-img {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+/* Кнопка бургер — по центру шапки */
+.site-header__menu-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1.5px solid var(--color-portfolio-primary, #66735a);
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-portfolio-primary, #66735a);
+  transition: background 0.18s, color 0.18s;
+  flex-shrink: 0;
+}
+
+.site-header__menu-btn:hover {
+  background: rgba(102, 115, 90, 0.08);
+}
+
+.site-header__menu-btn svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  transition: opacity 0.15s;
+}
+
+.site-header__menu-btn .icon-menu  { display: block; }
+.site-header__menu-btn .icon-close { display: none;  }
+.site-header__menu-btn.is-open .icon-menu  { display: none;  }
+.site-header__menu-btn.is-open .icon-close { display: block; }
+
+/* Кнопка «Помочь проекту» — справа */
+.site-header__cta {
+  margin-left: auto;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  line-height: 1;
+  white-space: nowrap;
+  background: var(--color-portfolio-accent, #b54f45);
+  color: #ffffff;
+  transition: background 0.2s ease;
+}
+
+.site-header__cta:hover,
+.site-header__cta:focus-visible {
+  background: #9f453d;
+}
+
+/* Выпадающее меню */
+.site-nav {
+  display: none;
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  background: var(--color-portfolio-secondary, #ffffff);
+  border-top: 1px solid rgba(102, 115, 90, 0.1);
+  box-shadow: 0 8px 24px rgba(66, 80, 58, 0.1);
+  z-index: 49;
+}
+
+.site-nav.is-open {
+  display: block;
+}
+
+.site-nav__list {
+  max-width: 640px;
+  margin-inline: auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: block;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--color-portfolio-primary, #66735a);
+  text-decoration: none;
+  transition: color 0.15s;
+  text-align: center;
+}
+
+.site-nav__link:hover,
+.site-nav__link.is-active {
+  color: var(--color-portfolio-accent, #b54f45);
+}
+
+@media (max-width: 768px) {
+  .site-header__cta {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.8rem;
+  }
+}

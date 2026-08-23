@@ -27,6 +27,56 @@ app.get('/', (c) => {
   <link rel="stylesheet" href="/styles/globals.css" />
 </head>
 <body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SITE HEADER
+       ═══════════════════════════════════════════════════════ -->
+  <header class="site-header" id="site-header">
+    <div class="site-header__inner">
+
+      <!-- Логотип -->
+      <a href="/" class="site-header__logo" aria-label="Дом с Хвостом — на главную">
+        <img src="/assets/paw-logo.svg" alt="" class="site-header__logo-img" width="36" height="36" aria-hidden="true" />
+        Дом с Хвостом
+      </a>
+
+      <!-- Бургер-кнопка (по центру) -->
+      <button
+        type="button"
+        class="site-header__menu-btn"
+        id="menu-btn"
+        aria-label="Открыть меню"
+        aria-expanded="false"
+        aria-controls="site-nav"
+      >
+        <!-- Иконка бургер -->
+        <svg class="icon-menu" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <!-- Иконка крест -->
+        <svg class="icon-close" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- Кнопка справа -->
+      <a href="#postcard-section" class="site-header__cta">Помочь проекту</a>
+    </div>
+
+    <!-- Выпадающее навигационное меню -->
+    <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link" href="#about-section">О проекте</a></li>
+        <li><a class="site-nav__link" href="#directions-section">Направления работы</a></li>
+        <li><a class="site-nav__link" href="#grant-section">Грантовая поддержка</a></li>
+        <li><a class="site-nav__link" href="#territory-section">Территория Добрых Дел</a></li>
+        <li><a class="site-nav__link" href="#postcard-section">Как помочь</a></li>
+        <li><a class="site-nav__link" href="#founder-section">Руководитель проекта</a></li>
+        <li><a class="site-nav__link" href="#acquainted-section">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <main id="main-content">
     <section id="hero-section" class="hero-block reveal-up">
       <video class="hero-video"
