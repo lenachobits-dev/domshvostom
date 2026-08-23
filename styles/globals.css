@@ -1252,10 +1252,10 @@ body {
     padding-bottom: 1rem;
   }
 
-  /* 1. Шапка секции — компактная, влево */
+  /* 1. Шапка секции — компактная, влево, минимум снизу */
   .paw-header {
     padding-top: 1rem;
-    padding-bottom: 0.4rem;
+    padding-bottom: 0;
     text-align: left;
     flex-shrink: 0;
   }
@@ -1290,14 +1290,15 @@ body {
     align-items: stretch;
   }
 
-  /* Лапка — по центру, занимает всё свободное место */
+  /* Лапка — прижата к заголовку сверху, занимает свободное место */
   .paw-illustration {
     order: -1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex: 1 1 0;
     min-height: 0;
+    padding-top: 0.25rem;
   }
 
   .paw-svg {
@@ -1310,11 +1311,12 @@ body {
     display: block;
   }
 
-  /* Контент этапа — по высоте активной панели */
+  /* Контент этапа — вплотную под лапкой */
   .paw-content {
     position: static;
     flex: 0 0 auto;
     min-height: 0;
+    margin-top: 0;
   }
 
   /* На мобиле панели не абсолютные — высота по содержимому */
