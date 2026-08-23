@@ -1290,31 +1290,31 @@ body {
     align-items: stretch;
   }
 
-  /* Лапка — по центру, занимает ~40% оставшейся высоты */
+  /* Лапка — по центру, занимает всё свободное место */
   .paw-illustration {
     order: -1;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 0 0 42%;
+    flex: 1 1 0;
     min-height: 0;
   }
 
   .paw-svg {
-    max-width: 220px;
     width: 100%;
+    max-width: 280px;
     height: 100%;
-    max-height: 200px;
+    max-height: none;
     object-fit: contain;
     margin: 0 auto;
     display: block;
   }
 
-  /* Контент этапа — занимает оставшееся место */
+  /* Контент этапа — по высоте содержимого, не растягивается */
   .paw-content {
     position: relative;
-    flex: 1;
-    min-height: 0;
+    flex: 0 0 auto;
+    min-height: 160px;
   }
 
   /* Размеры внутри панелей */
