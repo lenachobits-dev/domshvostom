@@ -263,6 +263,17 @@ revealItems.forEach((item) => revealObserver.observe(item))
     }
   }
 
+  // Обновить состояние кнопок мобильной навигации
+  const updateMobileNav = (step) => {
+    const btnPrev = block.querySelector('.paw-mobile-btn--prev')
+    const btnNext = block.querySelector('.paw-mobile-btn--next')
+    const counter = block.querySelector('.paw-mobile-counter')
+    if (!btnPrev) return
+    btnPrev.disabled = step === 0
+    btnNext.disabled = step === 4
+    if (counter) counter.textContent = `${step === 0 ? 0 : step} / 4`
+  }
+
   // Активировать шаг (0..4)
   const activateStep = (step, noAnim) => {
     if (step < 0 || step > 4) return
@@ -383,17 +394,6 @@ revealItems.forEach((item) => revealObserver.observe(item))
     })
   }
 
-  const updateMobileNav = (step) => {
-    const btnPrev    = block.querySelector('.paw-mobile-btn--prev')
-    const btnNext    = block.querySelector('.paw-mobile-btn--next')
-    const counter    = block.querySelector('.paw-mobile-counter')
-    if (!btnPrev) return
-
-    btnPrev.disabled = step === 0
-    btnNext.disabled = step === 4
-    if (counter) counter.textContent = `${step === 0 ? 0 : step} / 4`
-  }
-
   // Инициализация с учётом мобиля
   const init = () => {
     if (isMobile()) {
@@ -439,4 +439,144 @@ revealItems.forEach((item) => revealObserver.observe(item))
     })
   })
 
+})()
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLL SLIDESHOW — блок 9
+   ═══════════════════════════════════════════════════════════ */
+;(function () {
+  const wrapper = document.querySelector('.scroll-slideshow')
+  if (!wrapper) return
+
+  const slides = Array.from(wrapper.querySelectorAll('.scroll-slideshow-slide'))
+  if (!slides.length) return
+
+  // Показываем первый слайд сразу
+  slides[0].style.opacity = '1'
+
+  const handleScroll = () => {
+    const rect = wrapper.getBoundingClientRect()
+    const windowHeight = window.innerHeight
+    const totalScroll = rect.height - windowHeight
+    if (totalScroll <= 0) return
+
+    const p = Math.max(0, Math.min(1, -rect.top / totalScroll))
+    const exactIndex = p * (slides.length - 1)
+    const ci = Math.min(Math.floor(exactIndex), slides.length - 1)
+    const ni = Math.min(ci + 1, slides.length - 1)
+    const blend = exactIndex - ci
+
+    slides.forEach((slide, i) => {
+      if (i === ci) {
+        slide.style.opacity = '1'
+        slide.style.clipPath = ''
+        slide.style.zIndex = '1'
+      } else if (i === ni && ci !== ni) {
+        slide.style.opacity = '1'
+        const hidden = (1 - blend) * 100
+        slide.style.clipPath = `inset(${hidden}% 0 0 0)`
+        slide.style.zIndex = '2'
+      } else {
+        slide.style.opacity = '0'
+        slide.style.clipPath = ''
+        slide.style.zIndex = '0'
+      }
+    })
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll()
+})()
+
+/* ═══════════════════════════════════════════════════════════
+   FACILITY CARDS — reveal on scroll (блок 8)
+   ═══════════════════════════════════════════════════════════ */
+;(function () {
+  const cards = document.querySelectorAll('.editorial-card')
+  if (!cards.length) return
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        const card = entry.target
+        const i = Number(card.dataset.index) || 0
+        card.style.setProperty('--reveal-delay', `${i * 100}ms`)
+        card.classList.add('is-visible')
+        observer.unobserve(card)
+      })
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+  )
+
+  cards.forEach((card) => observer.observe(card))
+})()
+
+/* ═══════════════════════════════════════════════════════════
+   YULIANA SLIDER — блок 13
+   ═══════════════════════════════════════════════════════════ */
+;(function () {
+  const slider = document.getElementById('yuliana-slider')
+  if (!slider) return
+
+  const imgEl   = document.getElementById('yuliana-img')
+  const titleEl = document.getElementById('yuliana-title')
+  const quoteEl = document.getElementById('yuliana-quote')
+  const textBox = document.getElementById('yuliana-text')
+  const btnPrev = document.getElementById('yuliana-prev')
+  const btnNext = document.getElementById('yuliana-next')
+
+  const slides = [
+    {
+      img: '/assets/vtroem.jpg',
+      alt: 'Юлиана с командой',
+      title: 'Об открытости проекта',
+      quote: 'Мой принцип — абсолютная открытость, доверие и сопричастность. Каждый, кто нас поддерживает, не «жертвует деньги» — он инвестирует в результат, который можно увидеть, потрогать и ощутить. Возможность приехать в любой момент и проверить. Доверие и репутация — мой главный и самый дорогой актив.',
+    },
+    {
+      img: '/assets/lapka.jpg',
+      alt: 'Лапка собаки',
+      title: 'О своём месте',
+      quote: 'Моё место — быть «мостиком». Между отчаянием и надеждой. Между человеком, который хочет выбросить собаку, и собакой, которая хочет жить. Когда я нашла это место во «вселенском механизме», ушла суета. Я перестала метаться. Я перестала бояться, что у меня не получится.',
+    },
+    {
+      img: '/assets/obiyatiya.jpeg',
+      alt: 'Объятия с собакой',
+      title: 'О выборе',
+      quote: 'Я не люблю слово «жертва». Оно пахнет несчастьем и жалостью. Я не жертвовала — я выбирала. Каждый раз осознанно, с открытыми глазами.',
+    },
+    {
+      img: '/assets/siluet.jpg',
+      alt: 'Силуэт на закате',
+      title: 'О главных учителях',
+      quote: 'Нас с детства учат люди. Родители — как правильно. Учителя — как думать. Книги — как жить. Но мои главные учителя оказались с хвостами. И говорят они глазами. Иногда — молчанием. Иногда — внезапным тёплым носом, уткнувшимся в ладонь в тот момент, когда ты готов развалиться.',
+    },
+  ]
+
+  let current = 0
+  let timer = null
+
+  const setSlide = (i) => {
+    current = (i + slides.length) % slides.length
+    const s = slides[current]
+    if (imgEl)   { imgEl.src = s.img; imgEl.alt = s.alt }
+    if (titleEl) titleEl.textContent = s.title
+    if (quoteEl) quoteEl.textContent = s.quote
+    // Перезапуск анимации
+    if (textBox) {
+      textBox.style.animation = 'none'
+      textBox.offsetHeight // reflow
+      textBox.style.animation = ''
+    }
+  }
+
+  const startTimer = () => {
+    clearInterval(timer)
+    timer = setInterval(() => setSlide(current + 1), 6000)
+  }
+
+  if (btnPrev) btnPrev.addEventListener('click', () => { setSlide(current - 1); startTimer() })
+  if (btnNext) btnNext.addEventListener('click', () => { setSlide(current + 1); startTimer() })
+
+  startTimer()
 })()

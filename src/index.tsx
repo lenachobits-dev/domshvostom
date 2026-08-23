@@ -5,6 +5,7 @@ const app = new Hono()
 
 app.use('/styles/*', serveStatic({ root: './public' }))
 app.use('/static/*', serveStatic({ root: './public' }))
+app.use('/assets/*', serveStatic({ root: './public' }))
 
 app.get('/', (c) => {
   return c.html(`<!DOCTYPE html>
@@ -222,7 +223,70 @@ app.get('/', (c) => {
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
-         БЛОК 4 — Пространство комплексной помощи (scroll story)
+         БЛОК 4 — Проект, который уже работает
+         ═══════════════════════════════════════════════════════ -->
+    <section id="trust-section" class="trust-numbers-block reveal-up">
+      <div class="trust-numbers-bg" aria-hidden="true"></div>
+      <div class="trust-numbers-overlay" aria-hidden="true"></div>
+      <div class="trust-numbers-content shell">
+        <p class="trust-numbers-overline">Цифры и факты</p>
+        <h2 class="trust-numbers-heading">Проект, который уже работает</h2>
+        <p class="trust-numbers-desc">
+          АНО «Дом с Хвостом» — это не просто приют, а системная помощь животным.
+          За цифрами — реальные судьбы, ежедневный труд и развитие инфраструктуры,
+          которая работает каждый день.
+        </p>
+        <ul class="trust-numbers-stats">
+          <li class="trust-numbers-stat">
+            <span class="trust-numbers-stat__number">5+</span>
+            <span class="trust-numbers-stat__label">лет помощи животным</span>
+          </li>
+          <li class="trust-numbers-stat">
+            <span class="trust-numbers-stat__number">2021</span>
+            <span class="trust-numbers-stat__label">официальная регистрация АНО</span>
+          </li>
+          <li class="trust-numbers-stat">
+            <span class="trust-numbers-stat__number">80+</span>
+            <span class="trust-numbers-stat__label">хвостиков проживают в приюте</span>
+          </li>
+          <li class="trust-numbers-stat">
+            <span class="trust-numbers-stat__number">9 га</span>
+            <span class="trust-numbers-stat__label">земли под развитие проекта «Территория Добрых Дел»</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 5 — Грантовая поддержка
+         ═══════════════════════════════════════════════════════ -->
+    <section id="grant-section" class="grant-block reveal-up">
+      <div class="grant-inner shell">
+        <p class="grant-overline">Оснащение для заботы</p>
+        <h2 class="grant-heading">Грантовая поддержка</h2>
+        <div class="grant-visual">
+          <figure class="grant-figure">
+            <img class="grant-img" src="/static/vet.jpg" alt="Ветеринарное оборудование" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+        <div class="grant-body">
+          <p class="grant-desc">
+            Благодаря поддержке гранта Главы Республики Башкортостан при содействии Фонда грантов проект
+            получил возможность усилить свою практическую базу. Эти средства были направлены на закупку
+            оборудования для ветеринарной помощи и груминга — того, что ежедневно влияет на качество
+            жизни животных, скорость восстановления и уровень ухода.
+          </p>
+          <p class="grant-desc">
+            Это не формальная поддержка на бумаге, а конкретные инструменты, которые уже работают
+            на благо животных: ветеринарное оборудование, инвентарь для процедур, техника и оснащение
+            для санитарно-гигиенического ухода.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 6 — Пространство комплексной помощи (scroll story)
          ═══════════════════════════════════════════════════════ -->
     <section id="paw-section" class="paw-block" aria-label="Пространство комплексной помощи">
 
@@ -622,6 +686,310 @@ app.get('/', (c) => {
         <span class="pc-foot__thanks">спасибо, что дочитали — это уже участие ♡</span>
       </div>
 
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 7 — Территория Добрых Дел
+         ═══════════════════════════════════════════════════════ -->
+    <section id="territory-section" class="territory-block reveal-up">
+      <div class="territory-header shell">
+        <p class="territory-overline">Новый проект</p>
+        <h2 class="territory-heading">Территория Добрых Дел</h2>
+        <p class="territory-subheading">Первый в России самоокупаемый экосистемный центр помощи животным</p>
+      </div>
+
+      <div class="territory-grid">
+        <div class="territory-row shell">
+          <div class="territory-image-wrap">
+            <figure class="territory-figure">
+              <img src="/static/doska.jpg" alt="Доска почёта проекта Территория Добрых Дел"
+                class="territory-img" loading="lazy" decoding="async" />
+              <div class="territory-img-overlay"></div>
+            </figure>
+          </div>
+          <div class="territory-text">
+            <p class="territory-text-content">
+              Следующий большой шаг проекта — создание нового центра «Территория Добрых Дел».
+              Это пространство, где будет комфортно и животным, и людям. Пространство,
+              в котором помощь строится не на выживании от сбора к сбору, а на продуманной
+              системе, рассчитанной на годы вперёд.
+            </p>
+          </div>
+        </div>
+
+        <div class="territory-row territory-row--reverse shell">
+          <div class="territory-image-wrap">
+            <figure class="territory-figure">
+              <img src="/static/promo.jpg" alt="Промо-изображение территории центра"
+                class="territory-img" loading="lazy" decoding="async" />
+              <div class="territory-img-overlay"></div>
+            </figure>
+          </div>
+          <div class="territory-text">
+            <p class="territory-text-content">
+              Проект развивается на участке площадью 9 гектаров в Благовещенском районе Башкортостана.
+              Центр рассчитан на 350 собак, 150 кошек и десятки диких животных и птиц. Здесь будут
+              созданы условия для лечения, адаптации, социализации, проживания, реабилитации
+              и безопасной жизни.
+            </p>
+          </div>
+        </div>
+
+        <div class="territory-row shell">
+          <div class="territory-image-wrap">
+            <figure class="territory-figure">
+              <img src="/static/white.jpeg" alt="Архитектурный план центра Территория Добрых Дел"
+                class="territory-img" loading="lazy" decoding="async" />
+              <div class="territory-img-overlay"></div>
+            </figure>
+          </div>
+          <div class="territory-text">
+            <p class="territory-text-content">
+              Концепция центра построена вокруг принципа «самоокупаемость + социальная миссия».
+              Часть услуг будет коммерческой, а выручка направляться на уставную деятельность —
+              помощь животным.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="territory-epilogue shell">
+        <p class="territory-epilogue-text">
+          Мы создаём место, где добро — не разовая акция, а среда. Место, где можно помогать
+          системно. Место, где животные и люди возвращают друг другу доверие и смысл.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 8 — Что появится на Территории Добрых Дел
+         ═══════════════════════════════════════════════════════ -->
+    <section class="facility-block" id="facility-section">
+      <div class="facility-header shell">
+        <p class="facility-overline">Территория Добрых Дел</p>
+        <h2 class="facility-heading">Что появится на территории</h2>
+        <p class="facility-subheading">
+          Центр будет застраиваться постепенно. На территории запланированы
+          пространства для помощи, отдыха и памяти.
+        </p>
+      </div>
+      <div class="editorial-grid shell">
+        <article class="editorial-card" data-index="0">
+          <div class="editorial-card__bg" style="background-image:url('/assets/vet-clinic-facility.jpg')"></div>
+          <div class="editorial-card__overlay"></div>
+          <div class="editorial-card__body">
+            <h3 class="editorial-card__title">Ветеринарная клиника</h3>
+            <p class="editorial-card__desc">Помощь, диагностика, восстановление</p>
+          </div>
+        </article>
+        <article class="editorial-card" data-index="1">
+          <div class="editorial-card__bg" style="background-image:url('/assets/rehab-facility.jpg')"></div>
+          <div class="editorial-card__overlay"></div>
+          <div class="editorial-card__body">
+            <h3 class="editorial-card__title">Реабилитация и адаптация</h3>
+            <p class="editorial-card__desc">Мягкое возвращение животных к жизни рядом с человеком</p>
+          </div>
+        </article>
+        <article class="editorial-card" data-index="2">
+          <div class="editorial-card__bg" style="background-image:url('/assets/tourist-facility.jpg')"></div>
+          <div class="editorial-card__overlay"></div>
+          <div class="editorial-card__body">
+            <h3 class="editorial-card__title">Туристическая зона</h3>
+            <p class="editorial-card__desc">Пространство для гостей, друзей и поддержки проекта</p>
+          </div>
+        </article>
+        <article class="editorial-card" data-index="3">
+          <div class="editorial-card__bg" style="background-image:url('/assets/dog-park-facility.jpg')"></div>
+          <div class="editorial-card__overlay"></div>
+          <div class="editorial-card__body">
+            <h3 class="editorial-card__title">Большой кинологический парк</h3>
+            <p class="editorial-card__desc">Занятия, прогулки, социализация</p>
+          </div>
+        </article>
+        <article class="editorial-card" data-index="4">
+          <div class="editorial-card__bg" style="background-image:url('/assets/pharmacy-garden-facility.png')"></div>
+          <div class="editorial-card__overlay"></div>
+          <div class="editorial-card__body">
+            <h3 class="editorial-card__title">Аптекарский сад</h3>
+            <p class="editorial-card__desc">Живая природная среда и атмосфера места</p>
+          </div>
+        </article>
+        <article class="editorial-card" data-index="5">
+          <div class="editorial-card__bg" style="background-image:url('/assets/memory-garden-facility.jpg')"></div>
+          <div class="editorial-card__overlay"></div>
+          <div class="editorial-card__body">
+            <h3 class="editorial-card__title">Сад памяти лучшего друга</h3>
+            <p class="editorial-card__desc">Возможность посадить дерево в память о любимом ушедшем животном</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 9 — Scroll-slideshow объектов территории
+         ═══════════════════════════════════════════════════════ -->
+    <section class="scroll-slideshow" id="slideshow-section" aria-label="Что появится на Территории Добрых Дел">
+      <div class="scroll-slideshow-sticky">
+        <div class="scroll-slideshow-slide" data-slide="0">
+          <div class="scroll-slideshow-bg" style="background-image:url('/assets/vet-clinic.jpg')"></div>
+          <div class="scroll-slideshow-overlay"></div>
+          <div class="scroll-slideshow-content">
+            <h2 class="scroll-slideshow-title">Ветеринарная клиника</h2>
+            <p class="scroll-slideshow-desc">Помощь, диагностика, восстановление</p>
+          </div>
+        </div>
+        <div class="scroll-slideshow-slide" data-slide="1">
+          <div class="scroll-slideshow-bg" style="background-image:url('/assets/rehab-center.jpg')"></div>
+          <div class="scroll-slideshow-overlay"></div>
+          <div class="scroll-slideshow-content">
+            <h2 class="scroll-slideshow-title">Реабилитация и адаптация</h2>
+            <p class="scroll-slideshow-desc">Мягкое возвращение животных к жизни рядом с человеком</p>
+          </div>
+        </div>
+        <div class="scroll-slideshow-slide" data-slide="2">
+          <div class="scroll-slideshow-bg" style="background-image:url('/assets/tourist-zone.jpg')"></div>
+          <div class="scroll-slideshow-overlay"></div>
+          <div class="scroll-slideshow-content">
+            <h2 class="scroll-slideshow-title">Туристическая зона</h2>
+            <p class="scroll-slideshow-desc">Пространство для гостей, друзей и поддержки проекта</p>
+          </div>
+        </div>
+        <div class="scroll-slideshow-slide" data-slide="3">
+          <div class="scroll-slideshow-bg" style="background-image:url('/assets/dog-park.jpg')"></div>
+          <div class="scroll-slideshow-overlay"></div>
+          <div class="scroll-slideshow-content">
+            <h2 class="scroll-slideshow-title">Большой кинологический парк</h2>
+            <p class="scroll-slideshow-desc">Занятия, прогулки, социализация</p>
+          </div>
+        </div>
+        <div class="scroll-slideshow-slide" data-slide="4">
+          <div class="scroll-slideshow-bg" style="background-image:url('/assets/pharmacy-garden.png')"></div>
+          <div class="scroll-slideshow-overlay"></div>
+          <div class="scroll-slideshow-content">
+            <h2 class="scroll-slideshow-title">Аптекарский сад</h2>
+            <p class="scroll-slideshow-desc">Живая природная среда и атмосфера места</p>
+          </div>
+        </div>
+        <div class="scroll-slideshow-slide" data-slide="5">
+          <div class="scroll-slideshow-bg" style="background-image:url('/assets/memory-garden.jpg')"></div>
+          <div class="scroll-slideshow-overlay"></div>
+          <div class="scroll-slideshow-content">
+            <h2 class="scroll-slideshow-title">Сад памяти лучшего друга</h2>
+            <p class="scroll-slideshow-desc">Возможность посадить дерево в память о любимом ушедшем животном</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 10 — Почему нам нужна ваша помощь
+         ═══════════════════════════════════════════════════════ -->
+    <section id="why-help-section" class="why-help-block reveal-up">
+      <div class="why-help-inner shell">
+        <p class="why-help-overline">Путь к большой цели</p>
+        <h2 class="why-help-heading">Почему нам нужна ваша помощь</h2>
+        <div class="why-help-video">
+          <div class="why-help-video-wrap">
+            <iframe
+              src="https://vk.com/video_ext.php?oid=-220471881&id=456239869&autoplay=0"
+              class="why-help-iframe"
+              allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock"
+              allowfullscreen
+              loading="lazy"
+              title="Видео-презентация проекта Дом с Хвостом"
+            ></iframe>
+          </div>
+        </div>
+        <div class="why-help-body">
+          <p class="why-help-paragraph">
+            Большие добрые проекты не появляются в один день. За каждым спасённым животным стоят
+            лекарства, корм, уход, дорога, обработка, время, труд людей и инфраструктура, которая
+            делает помощь возможной. Сейчас «Дом с Хвостом» находится в точке роста: уже есть
+            действующий приют, есть доверие, есть опыт, есть земля и большая понятная цель.
+          </p>
+          <p class="why-help-paragraph">
+            Но чтобы «Территория Добрых Дел» стала реальностью, нужна поддержка —
+            людей, бизнеса, партнёров, волонтёров, друзей проекта и всех, кому не всё равно.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 12 — Юлиана Гафарова — основатель
+         ═══════════════════════════════════════════════════════ -->
+    <section id="founder-section" class="founder-block reveal-up">
+      <div class="founder-inner shell">
+        <p class="founder-overline">Голос проекта</p>
+        <h2 class="founder-heading">Юлиана Гафарова — основатель и руководитель проектов</h2>
+        <div class="founder-visual">
+          <div class="founder-collage">
+            <div class="founder-collage__item founder-collage__item--a">
+              <img src="/static/founder-stage.jpg" alt="Юлиана Гафарова на сцене" loading="lazy" decoding="async" />
+            </div>
+            <div class="founder-collage__item founder-collage__item--b">
+              <img src="/static/founder-tenderness.jpg" alt="Юлиана Гафарова с животным" loading="lazy" decoding="async" />
+            </div>
+            <div class="founder-collage__item founder-collage__item--c">
+              <img src="/static/founder-smile.jpg" alt="Юлиана Гафарова улыбается" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+        <div class="founder-body">
+          <p class="founder-paragraph">
+            Юлиана Гафарова — основатель «Дома с Хвостом» и автор проекта «Территория Добрых Дел».
+          </p>
+          <p class="founder-paragraph">
+            По образованию дизайнер и юрист, уже шесть лет шаг за шагом Юлиана развивает систему
+            помощи животным: от ежедневной практической работы в приюте до проектирования будущего
+            центра, расчётов, смет и грантовой поддержки.
+          </p>
+          <p class="founder-paragraph">
+            В основе её подхода — открытость, доверие, ответственность и желание строить помощь
+            не на эмоции одного дня, а на прочной долгосрочной системе.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 13 — Юлиана — о проекте и своём пути (slider)
+         ═══════════════════════════════════════════════════════ -->
+    <section id="yuliana-section" class="yuliana-block">
+      <div class="yuliana-inner shell">
+        <p class="yuliana-overline">О смыслах</p>
+        <h2 class="yuliana-heading">Юлиана — о проекте и своём пути</h2>
+        <div class="yuliana-slider" id="yuliana-slider">
+          <div class="yuliana-slider__visual">
+            <figure class="yuliana-slider__figure">
+              <img id="yuliana-img" src="/assets/vtroem.jpg" alt="Юлиана с командой"
+                class="yuliana-slider__img" loading="lazy" decoding="async" />
+            </figure>
+            <nav class="yuliana-slider__nav">
+              <button class="yuliana-slider__btn" id="yuliana-prev" aria-label="Предыдущий слайд" type="button">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="yuliana-slider__btn" id="yuliana-next" aria-label="Следующий слайд" type="button">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </nav>
+          </div>
+          <div class="yuliana-slider__text" id="yuliana-text">
+            <div class="yuliana-pawprints" aria-hidden="true"></div>
+            <h3 class="yuliana-slider__title" id="yuliana-title">Об открытости проекта</h3>
+            <p class="yuliana-slider__quote" id="yuliana-quote">
+              Мой принцип — абсолютная открытость, доверие и сопричастность. Каждый, кто нас поддерживает,
+              не «жертвует деньги» — он инвестирует в результат, который можно увидеть, потрогать и ощутить.
+              Возможность приехать в любой момент и проверить. Доверие и репутация — мой главный
+              и самый дорогой актив.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
   <!-- ═══════════════ SITE FOOTER ═══════════════ -->
