@@ -1,3 +1,10 @@
+/* ─── CSS custom properties ──────────────────────────────── */
+:root {
+  --color-portfolio-primary:    #66735a;
+  --color-portfolio-text-soft:  #5f6a55;
+  --color-portfolio-border:     #9aa58e;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -1225,33 +1232,42 @@ body {
 }
 
 /* ─── Адаптив: мобиль ≤ 768px ───────────────────────────
-   На мобиле sticky-scroll может раздражать.
-   Переключаемся на лёгкий tap-to-advance вместо scroll-lock.  */
+   Sticky-scroll 550vh сохраняем; tap-навигация — поверх через JS.  */
 @media (max-width: 768px) {
-  /* Секция не занимает 550vh — только авто, без scroll-jack */
+  /* Секция занимает 550vh для sticky-scroll */
   .paw-block {
-    height: auto;
+    height: 550vh;
   }
 
   .paw-sticky {
-    position: relative;
-    height: auto;
-    min-height: unset;
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    min-height: 520px;
+    padding-bottom: 0.5rem;
   }
 
   /* Шапка */
   .paw-header {
-    padding-top: 3rem;
+    padding-top: 1.1rem;
     text-align: left;
-    padding-bottom: 1rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .paw-overline {
+    margin-bottom: 0.3rem;
+  }
+
+  .paw-heading {
+    margin-bottom: 0.25rem;
   }
 
   /* Stage: колонка */
   .paw-stage {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    padding-bottom: 2rem;
-    align-items: start;
+    gap: 0.5rem;
+    padding-bottom: 0;
+    align-items: center;
   }
 
   /* SVG меньше, по центру */
@@ -1260,37 +1276,57 @@ body {
   }
 
   .paw-svg {
-    max-width: 220px;
+    max-width: 240px;
     margin: 0 auto;
     display: block;
   }
 
-  /* Контент — статическая высота, не абсолютная позиция */
+  /* Контент — минимальная высота, абсолютная позиция сохраняется */
   .paw-content {
-    position: static;
-    min-height: unset;
+    min-height: 245px;
   }
 
-  .paw-panel {
-    position: static;
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-    display: none;
-    transition: none;
+  /* Размеры внутри панелей */
+  .paw-panel__inner {
+    gap: 0.6rem;
   }
 
-  .paw-panel.is-active {
-    display: flex;
-    opacity: 1;
-    transform: none;
+  .paw-panel__step-badge {
+    gap: 0.5rem;
+  }
+
+  .paw-panel__step-num {
+    font-size: 1.6rem;
+  }
+
+  .paw-panel__title {
+    font-size: 1.05rem;
+    line-height: 1.15;
+  }
+
+  .paw-panel__text {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .paw-panel--heel .paw-panel__text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .paw-panel__list {
+    gap: 0.25rem;
+  }
+
+  .paw-panel__list li {
+    font-size: 0.78rem;
   }
 
   /* Кнопки навигации мобиля */
   .paw-mobile-nav {
     display: flex;
     gap: 0.75rem;
-    margin-top: 1.25rem;
+    margin-top: 0.6rem;
     align-items: center;
   }
 
@@ -1301,16 +1337,16 @@ body {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    border: 1.5px solid var(--color-border);
+    border: 1.5px solid var(--color-portfolio-border);
     background: transparent;
-    color: var(--color-primary);
+    color: var(--color-portfolio-primary);
     cursor: pointer;
     transition: background 200ms, border-color 200ms;
   }
 
   .paw-mobile-btn:hover {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
+    background: var(--color-portfolio-primary);
+    border-color: var(--color-portfolio-primary);
     color: #fff;
   }
 
@@ -1321,15 +1357,15 @@ body {
 
   .paw-mobile-counter {
     font-size: 0.82rem;
-    color: var(--color-text-soft);
+    color: var(--color-portfolio-text-soft);
   }
 
-  /* Прогресс снизу — упрощённый */
+  /* Прогресс снизу */
   .paw-progress {
     position: static;
     transform: none;
-    margin-top: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin-top: 0.6rem;
+    margin-bottom: 0.75rem;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -1355,7 +1391,7 @@ body {
   }
 
   .paw-sticky {
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
   }
 }
 
