@@ -792,7 +792,7 @@ app.get('/', (c) => {
           </div>
         </article>
 
-        <!-- 04 — Партнёрство (широкая горизонтальная) -->
+        <!-- 03 — Партнёрство (широкая горизонтальная) -->
         <article class="pc-card pc-card--partner">
           <span class="pc-tape pc-tape--right" aria-hidden="true"></span>
           <span class="pc-pin pc-pin--sage pc-pin--tl" aria-hidden="true"></span>
@@ -802,7 +802,7 @@ app.get('/', (c) => {
               <img src="/static/pc-meksikancy.jpg" alt="Три мексиканские голые собаки рядом с подарками для приюта" loading="lazy" decoding="async"/>
             </div>
             <div class="pc-card__meta pc-card__meta--centered">
-              <div class="pc-card__num">04 · партнёрство</div>
+              <div class="pc-card__num">03 · партнёрство</div>
               <h3 class="pc-card__title pc-card__title--lg">Стать партнёром</h3>
               <p class="pc-card__desc">Проект открыт к сотрудничеству с бизнесом, специалистами, фондами и социально ответственными инициативами.</p>
               <span class="pc-cta">Обсудить проект
@@ -833,7 +833,7 @@ app.get('/', (c) => {
           </div>
         </div>
 
-        <!-- 03 — Рассказать -->
+        <!-- 04 — Рассказать -->
         <article class="pc-card pc-card--share">
           <span class="pc-pin pc-pin--red pc-pin--top" aria-hidden="true"></span>
           <span class="pc-sticky pc-sticky--share" aria-hidden="true">расскажи!</span>
@@ -841,7 +841,7 @@ app.get('/', (c) => {
             <img src="/static/pc-para.jpg" alt="Девушка держит листовку о проекте" loading="lazy" decoding="async"/>
           </div>
           <div class="pc-card__meta">
-            <div class="pc-card__num">03 · рассказать</div>
+            <div class="pc-card__num">04 · рассказать</div>
             <h3 class="pc-card__title">Рассказать о проекте</h3>
             <p class="pc-card__desc">Иногда один репост, одно знакомство или одна рекомендация приводят к настоящему спасению.</p>
             <span class="pc-cta">Поделиться
