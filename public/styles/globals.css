@@ -1310,11 +1310,30 @@ body {
     display: block;
   }
 
-  /* Контент этапа — по высоте содержимого, не растягивается */
+  /* Контент этапа — по высоте активной панели */
   .paw-content {
-    position: relative;
+    position: static;
     flex: 0 0 auto;
-    min-height: 160px;
+    min-height: 0;
+  }
+
+  /* На мобиле панели не абсолютные — высота по содержимому */
+  .paw-panel {
+    position: static;
+    display: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .paw-panel.is-active {
+    display: flex;
+    opacity: 1;
+    transform: none;
+  }
+
+  .paw-panel.is-leaving {
+    display: none;
   }
 
   /* Размеры внутри панелей */
