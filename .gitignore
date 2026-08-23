@@ -7,3 +7,5 @@ logs/
 *.log
 *.tar.gz
 .DS_Store
+
+# --- merged from SourceCraft ---

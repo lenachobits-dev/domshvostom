@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"
+     role="img" aria-label="Лапка">
+  <title>Лапка</title>
+
+  <!-- ===== Фон: почти круг, но всё ещё виден квадрат (скругление ~35%) ===== -->
+  <rect x="0" y="0" width="512" height="512" rx="180" ry="180" fill="#B54F45"/>
+
+  <!-- ===== Лапка (контур, наклон вправо ~15°) ===== -->
+  <g transform="rotate(15 256 256)"
+     fill="none" stroke="#FFFFFF" stroke-width="14"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Подушечка (крупный овал по центру внизу) -->
+    <path d="M 256 380
+             C 200 380, 165 340, 165 300
+             C 165 260, 200 235, 256 235
+             C 312 235, 347 260, 347 300
+             C 347 340, 312 380, 256 380 Z"/>
+
+    <!-- Верхний-левый палец -->
+    <ellipse cx="185" cy="170" rx="28" ry="40"
+             transform="rotate(-20 185 170)"/>
+
+    <!-- Верхний-центрально-левый палец -->
+    <ellipse cx="228" cy="128" rx="28" ry="42"
+             transform="rotate(-8 228 128)"/>
+
+    <!-- Верхний-центрально-правый палец -->
+    <ellipse cx="284" cy="128" rx="28" ry="42"
+             transform="rotate(8 284 128)"/>
+
+    <!-- Верхний-правый палец -->
+    <ellipse cx="327" cy="170" rx="28" ry="40"
+             transform="rotate(20 327 170)"/>
+  </g>
+</svg>
