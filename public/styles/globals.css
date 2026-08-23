@@ -1373,17 +1373,19 @@ body {
     font-size: 0.78rem;
   }
 
-  /* Прогресс снизу */
+  /* Прогресс снизу — с воздухом над ним */
   .paw-progress {
     position: static;
     transform: none;
-    margin-top: 0.4rem;
+    margin-top: 1.25rem;
     margin-bottom: 0.4rem;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 0.75rem;
     flex-shrink: 0;
+    align-self: center;
+    width: 100%;
   }
 
   .paw-progress__track {
