@@ -595,68 +595,28 @@ app.get('/', (c) => {
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
-         БЛОК 8 — Что появится на Территории Добрых Дел
+         БЛОК 8 — TerritoryIntro: тёмный parallax-блок (как в SC)
          ═══════════════════════════════════════════════════════ -->
-    <section class="facility-block" id="facility-section">
-      <div class="facility-header shell">
-        <p class="facility-overline">Территория Добрых Дел</p>
-        <h2 class="facility-heading">Что появится на территории</h2>
-        <p class="facility-subheading">
-          Центр будет застраиваться постепенно. На территории запланированы
-          пространства для помощи, отдыха и памяти.
+    <section class="territory-intro-block" id="facility-section">
+      <div class="territory-intro-bg" aria-hidden="true"></div>
+      <div class="territory-intro-content shell">
+        <h2 class="territory-intro-heading">
+          Что появится на Территории Добрых Дел
+        </h2>
+        <p class="territory-intro-text">
+          Центр будет застраиваться постепенно. На территории запланированы не
+          только пространства для животных, но и инфраструктура, которая поможет
+          проекту стать устойчивым и самоокупаемым.
         </p>
       </div>
-      <div class="editorial-grid shell">
-        <article class="editorial-card" data-index="0">
-          <div class="editorial-card__bg" style="background-image:url('/assets/vet-clinic-facility.jpg')"></div>
-          <div class="editorial-card__overlay"></div>
-          <div class="editorial-card__body">
-            <h3 class="editorial-card__title">Ветеринарная клиника</h3>
-            <p class="editorial-card__desc">Помощь, диагностика, восстановление</p>
-          </div>
-        </article>
-        <article class="editorial-card" data-index="1">
-          <div class="editorial-card__bg" style="background-image:url('/assets/rehab-facility.jpg')"></div>
-          <div class="editorial-card__overlay"></div>
-          <div class="editorial-card__body">
-            <h3 class="editorial-card__title">Реабилитация и адаптация</h3>
-            <p class="editorial-card__desc">Мягкое возвращение животных к жизни рядом с человеком</p>
-          </div>
-        </article>
-        <article class="editorial-card" data-index="2">
-          <div class="editorial-card__bg" style="background-image:url('/assets/tourist-facility.jpg')"></div>
-          <div class="editorial-card__overlay"></div>
-          <div class="editorial-card__body">
-            <h3 class="editorial-card__title">Туристическая зона</h3>
-            <p class="editorial-card__desc">Пространство для гостей, друзей и поддержки проекта</p>
-          </div>
-        </article>
-        <article class="editorial-card" data-index="3">
-          <div class="editorial-card__bg" style="background-image:url('/assets/dog-park-facility.jpg')"></div>
-          <div class="editorial-card__overlay"></div>
-          <div class="editorial-card__body">
-            <h3 class="editorial-card__title">Большой кинологический парк</h3>
-            <p class="editorial-card__desc">Занятия, прогулки, социализация</p>
-          </div>
-        </article>
-        <article class="editorial-card" data-index="4">
-          <div class="editorial-card__bg" style="background-image:url('/assets/pharmacy-garden-facility.png')"></div>
-          <div class="editorial-card__overlay"></div>
-          <div class="editorial-card__body">
-            <h3 class="editorial-card__title">Аптекарский сад</h3>
-            <p class="editorial-card__desc">Живая природная среда и атмосфера места</p>
-          </div>
-        </article>
-        <article class="editorial-card" data-index="5">
-          <div class="editorial-card__bg" style="background-image:url('/assets/memory-garden-facility.jpg')"></div>
-          <div class="editorial-card__overlay"></div>
-          <div class="editorial-card__body">
-            <h3 class="editorial-card__title">Сад памяти лучшего друга</h3>
-            <p class="editorial-card__desc">Возможность посадить дерево в память о любимом ушедшем животном</p>
-          </div>
-        </article>
-      </div>
     </section>
+
+    <!-- Separator -->
+    <div class="territory-intro-separator">
+      <p class="territory-intro-separator-text">
+        Листайте ниже, чтобы ознакомиться с проектом
+      </p>
+    </div>
 
     <!-- ═══════════════════════════════════════════════════════
          БЛОК 9 — Scroll-slideshow объектов территории
