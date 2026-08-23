@@ -1232,8 +1232,8 @@ body {
 }
 
 /* ─── Адаптив: мобиль ≤ 768px ───────────────────────────
-   Sticky-scroll 550vh сохраняем. Layout перестроен:
-   иллюстрация компактна сверху, контент снизу.          */
+   Sticky-scroll 550vh сохраняем.
+   Layout: заголовок → [SVG слева | контент справа]       */
 @media (max-width: 768px) {
   /* Секция занимает 550vh для sticky-scroll */
   .paw-block {
@@ -1255,7 +1255,7 @@ body {
   /* Шапка: компактная, выровнена влево */
   .paw-header {
     padding-top: 1rem;
-    padding-bottom: 0.3rem;
+    padding-bottom: 0.5rem;
     text-align: left;
     flex-shrink: 0;
   }
@@ -1266,53 +1266,53 @@ body {
   }
 
   .paw-heading {
-    font-size: clamp(1.1rem, 5vw, 1.5rem);
-    margin-bottom: 0.15rem;
+    font-size: clamp(1.1rem, 5vw, 1.4rem);
+    margin-bottom: 0.2rem;
   }
 
-  /* Скрываем подзаголовок — нет места */
+  /* Подзаголовок — оставляем, уменьшаем */
   .paw-subheading {
-    display: none;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    max-width: none;
+    margin-inline: 0;
   }
 
-  /* Stage: иллюстрация + контент в колонку, flex-растяжение */
+  /* Stage: SVG слева, контент справа — в одну строку */
   .paw-stage {
     flex: 1;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    gap: 0.4rem;
+    grid-template-columns: 140px 1fr;
+    gap: 0.75rem;
     padding-bottom: 0.5rem;
     align-items: start;
     min-height: 0;
   }
 
-  /* SVG сверху, компактный */
+  /* SVG — нормальный порядок (слева), без order */
   .paw-illustration {
-    order: -1;
+    order: 0;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
   }
 
   .paw-svg {
-    max-width: 180px;
-    margin: 0 auto;
+    max-width: 130px;
+    width: 100%;
+    margin: 0;
     display: block;
   }
 
-  /* Контент растягивается на всё оставшееся место */
+  /* Контент — правая колонка, высота по содержимому */
   .paw-content {
     position: relative;
-    min-height: 0;
-    flex: 1;
+    min-height: 220px;
   }
-
-  /* Панели — абсолютная позиция сохраняется, анимация работает */
-  /* (не переопределяем .paw-panel — пусть работает стандартный CSS) */
 
   /* Размеры внутри панелей */
   .paw-panel__inner {
-    gap: 0.5rem;
+    gap: 0.45rem;
   }
 
   .paw-panel__step-badge {
@@ -1324,18 +1324,18 @@ body {
   }
 
   .paw-panel__title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.2;
   }
 
   .paw-panel__text {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     line-height: 1.5;
   }
 
   .paw-panel--heel .paw-panel__text {
-    font-size: 0.85rem;
-    line-height: 1.6;
+    font-size: 0.82rem;
+    line-height: 1.55;
   }
 
   .paw-panel__list {
@@ -1343,7 +1343,7 @@ body {
   }
 
   .paw-panel__list li {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
   }
 
   /* Прогресс снизу */
