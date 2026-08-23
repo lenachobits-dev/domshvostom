@@ -1240,21 +1240,22 @@ body {
     padding-bottom: 0;
   }
 
-  /* Sticky-viewport: flex-колонка */
+  /* Sticky-viewport: flex-колонка, высота по содержимому */
   .paw-sticky {
     position: sticky;
     top: 0;
     height: 100svh;
-    min-height: 520px;
+    min-height: 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    padding-bottom: 1rem;
+    justify-content: flex-start;
+    padding-bottom: 1.5rem;
   }
 
   /* 1. Шапка секции — компактная, влево, минимум снизу */
   .paw-header {
-    padding-top: 1rem;
+    padding-top: 1.25rem;
     padding-bottom: 0;
     text-align: left;
     flex-shrink: 0;
@@ -1276,12 +1277,12 @@ body {
     line-height: 1.4;
     max-width: none;
     margin-inline: 0;
+    margin-bottom: 0;
   }
 
-  /* 2. Stage: одна колонка, иллюстрация сверху (order -1),
-        контент снизу; stage растягивается на свободное место */
+  /* 2. Stage: одна колонка, не растягивается */
   .paw-stage {
-    flex: 1;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -1290,25 +1291,23 @@ body {
     align-items: stretch;
   }
 
-  /* Лапка — прижата к заголовку сверху, занимает свободное место */
+  /* Лапка — фиксированная высота, по центру */
   .paw-illustration {
     order: -1;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    flex: 1 1 0;
-    min-height: 0;
-    padding-top: 0.25rem;
+    align-items: center;
+    flex: 0 0 auto;
+    padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
   }
 
   .paw-svg {
-    width: 100%;
-    max-width: 280px;
-    height: 100%;
-    max-height: none;
-    object-fit: contain;
-    margin: 0 auto;
+    width: 72vw;
+    max-width: 260px;
+    height: auto;
     display: block;
+    margin: 0 auto;
   }
 
   /* Контент этапа — вплотную под лапкой */
