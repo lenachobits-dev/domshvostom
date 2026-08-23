@@ -675,7 +675,41 @@ app.get('/', (c) => {
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
-         БЛОК 5 — «Вы можете стать частью этой истории»
+         БЛОК 10 — Почему нам нужна ваша помощь
+         ═══════════════════════════════════════════════════════ -->
+    <section id="why-help-section" class="why-help-block reveal-up">
+      <div class="why-help-inner shell">
+        <p class="why-help-overline">Путь к большой цели</p>
+        <h2 class="why-help-heading">Почему нам нужна ваша помощь</h2>
+        <div class="why-help-video">
+          <div class="why-help-video-wrap">
+            <iframe
+              src="https://vk.com/video_ext.php?oid=-220471881&id=456239869&autoplay=0"
+              class="why-help-iframe"
+              allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock"
+              allowfullscreen
+              loading="lazy"
+              title="Видео-презентация проекта Дом с Хвостом"
+            ></iframe>
+          </div>
+        </div>
+        <div class="why-help-body">
+          <p class="why-help-paragraph">
+            Большие добрые проекты не появляются в один день. За каждым спасённым животным стоят
+            лекарства, корм, уход, дорога, обработка, время, труд людей и инфраструктура, которая
+            делает помощь возможной. Сейчас «Дом с Хвостом» находится в точке роста: уже есть
+            действующий приют, есть доверие, есть опыт, есть земля и большая понятная цель.
+          </p>
+          <p class="why-help-paragraph">
+            Но чтобы «Территория Добрых Дел» стала реальностью, нужна поддержка —
+            людей, бизнеса, партнёров, волонтёров, друзей проекта и всех, кому не всё равно.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         БЛОК 11 — «Вы можете стать частью этой истории»
          Postcard collage: 5 способов помочь
          ═══════════════════════════════════════════════════════ -->
     <section id="postcard-section" class="pc-stage" aria-labelledby="pc-title">
@@ -838,40 +872,6 @@ app.get('/', (c) => {
         <span class="pc-foot__thanks">спасибо, что дочитали — это уже участие ♡</span>
       </div>
 
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════
-         БЛОК 10 — Почему нам нужна ваша помощь
-         ═══════════════════════════════════════════════════════ -->
-    <section id="why-help-section" class="why-help-block reveal-up">
-      <div class="why-help-inner shell">
-        <p class="why-help-overline">Путь к большой цели</p>
-        <h2 class="why-help-heading">Почему нам нужна ваша помощь</h2>
-        <div class="why-help-video">
-          <div class="why-help-video-wrap">
-            <iframe
-              src="https://vk.com/video_ext.php?oid=-220471881&id=456239869&autoplay=0"
-              class="why-help-iframe"
-              allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock"
-              allowfullscreen
-              loading="lazy"
-              title="Видео-презентация проекта Дом с Хвостом"
-            ></iframe>
-          </div>
-        </div>
-        <div class="why-help-body">
-          <p class="why-help-paragraph">
-            Большие добрые проекты не появляются в один день. За каждым спасённым животным стоят
-            лекарства, корм, уход, дорога, обработка, время, труд людей и инфраструктура, которая
-            делает помощь возможной. Сейчас «Дом с Хвостом» находится в точке роста: уже есть
-            действующий приют, есть доверие, есть опыт, есть земля и большая понятная цель.
-          </p>
-          <p class="why-help-paragraph">
-            Но чтобы «Территория Добрых Дел» стала реальностью, нужна поддержка —
-            людей, бизнеса, партнёров, волонтёров, друзей проекта и всех, кому не всё равно.
-          </p>
-        </div>
-      </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
