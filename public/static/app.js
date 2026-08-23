@@ -259,8 +259,9 @@ revealItems.forEach((item) => revealObserver.observe(item))
 
 /* ═══════════════════════════════════════════════════════════
    PAW STORY — Scroll-driven storytelling (блок 4)
-   Desktop: sticky + IntersectionObserver + scroll progress
-   Mobile:  tap-to-advance с кнопками
+   Desktop + Mobile: sticky + scroll progress
+   На мобиле: та же 550vh высота, position: sticky — 
+   пальцы активируются при скролле как на десктопе.
    ═══════════════════════════════════════════════════════════ */
 ;(function () {
 
@@ -273,25 +274,22 @@ revealItems.forEach((item) => revealObserver.observe(item))
 
   // Шаги: heel (0) + toe-1..toe-4 (1..4)
   const STEPS = ['heel', 'toe-1', 'toe-2', 'toe-3', 'toe-4']
-  const TOTAL_STORY_STEPS = 4  // только toe-1..4
+  const TOTAL_STORY_STEPS = 4
 
-  let currentStep = 0  // 0 = heel
+  let currentStep = 0
 
   /* ────────────────────────────────────────────────────────
      Утилиты
   ──────────────────────────────────────────────────────── */
 
-  const getPanel  = (key) => content.querySelector(`[data-panel="${key}"]`)
-  const getToe    = (key) => block.querySelector(`.paw-zone[data-zone="${key}"]`)
-  const getDot    = (step) => block.querySelector(`.paw-dot[data-step="${step}"]`)
-  const getHeel   = ()    => block.querySelector('.paw-heel')
+  const getToe  = (key) => block.querySelector(`.paw-zone[data-zone="${key}"]`)
+  const getDot  = (step) => block.querySelector(`.paw-dot[data-step="${step}"]`)
+  const getHeel = ()     => block.querySelector('.paw-heel')
 
-  // Обновить прогресс-бар (0..1)
   const setProgress = (ratio) => {
     if (progressBar) progressBar.style.width = `${Math.round(ratio * 100)}%`
   }
 
-  // Переключить видимую панель
   const showPanel = (key) => {
     const panels = content.querySelectorAll('.paw-panel')
     panels.forEach((p) => {
@@ -303,7 +301,6 @@ revealItems.forEach((item) => revealObserver.observe(item))
         p.classList.add('is-leaving')
         p.classList.remove('is-active')
         p.setAttribute('aria-hidden', 'true')
-        // Убираем is-leaving после анимации
         const t = p
         setTimeout(() => t.classList.remove('is-leaving'), 320)
       } else {
@@ -313,13 +310,10 @@ revealItems.forEach((item) => revealObserver.observe(item))
     })
   }
 
-  // Обновить состояние SVG + точки для шага
   const updateVisuals = (step) => {
-    // Heel — активна только при step === 0
     const heel = getHeel()
     if (heel) heel.classList.toggle('is-active', step === 0)
 
-    // Пальцы 1..4
     for (let i = 1; i <= 4; i++) {
       const toe = getToe(`toe-${i}`)
       if (!toe) continue
@@ -327,7 +321,6 @@ revealItems.forEach((item) => revealObserver.observe(item))
       toe.classList.toggle('is-done',   i < step)
     }
 
-    // Точки прогресса
     for (let i = 1; i <= 4; i++) {
       const dot = getDot(i)
       if (!dot) continue
@@ -336,18 +329,6 @@ revealItems.forEach((item) => revealObserver.observe(item))
     }
   }
 
-  // Обновить состояние кнопок мобильной навигации
-  const updateMobileNav = (step) => {
-    const btnPrev = block.querySelector('.paw-mobile-btn--prev')
-    const btnNext = block.querySelector('.paw-mobile-btn--next')
-    const counter = block.querySelector('.paw-mobile-counter')
-    if (!btnPrev) return
-    btnPrev.disabled = step === 0
-    btnNext.disabled = step === 4
-    if (counter) counter.textContent = `${step === 0 ? 0 : step} / 4`
-  }
-
-  // Активировать шаг (0..4)
   const activateStep = (step, noAnim) => {
     if (step < 0 || step > 4) return
     currentStep = step
@@ -356,7 +337,6 @@ revealItems.forEach((item) => revealObserver.observe(item))
     if (!noAnim) {
       showPanel(key)
     } else {
-      // Без анимации (мобиль init)
       const panels = content.querySelectorAll('.paw-panel')
       panels.forEach((p) => {
         const active = p.dataset.panel === key
@@ -368,54 +348,41 @@ revealItems.forEach((item) => revealObserver.observe(item))
 
     updateVisuals(step)
 
-    // Прогресс: 0 на heel, 1/4..4/4 на шагах
     const ratio = step === 0 ? 0 : step / TOTAL_STORY_STEPS
     setProgress(ratio)
 
-    // Флаг "история началась" — скрываем scroll-hint
     if (step > 0) block.classList.add('story-started')
-
-    // Обновить мобильные кнопки
-    updateMobileNav(step)
   }
 
   /* ────────────────────────────────────────────────────────
-     DESKTOP: Sticky scroll progress
-     Читаем прокрученную долю внутри .paw-block и
-     переключаем шаги пропорционально.
+     Scroll-driven: работает на desktop И mobile
+     Блок занимает 550vh, sticky прикрепляет на экране.
+     Читаем прокрученную долю и переключаем шаги.
   ──────────────────────────────────────────────────────── */
 
-  const isMobile = () => window.innerWidth <= 768
-
   const handleScroll = () => {
-    if (isMobile()) return
-
     const rect      = block.getBoundingClientRect()
     const blockH    = block.offsetHeight
     const vpH       = window.innerHeight
 
-    // scrolled: сколько проскроллено внутри блока (0..blockH-vpH)
     const scrolled  = -rect.top
     const scrollMax = blockH - vpH
 
     if (scrolled < 0 || scrollMax <= 0) {
-      // Ещё не дошли до блока
       activateStep(0)
       return
     }
 
     if (scrolled >= scrollMax) {
-      // Прошли весь блок — все шаги done
       activateStep(4)
       return
     }
 
-    // ratio: 0 → 1 по всему диапазону блока
     const ratio = scrolled / scrollMax
 
-    // Разбиваем на 5 зон: heel(0..0.10) + 4 × 0.225 = 0.90
+    // heel(0..0.10) + 4 зоны по ~0.225
     let step = 0
-    if      (ratio < 0.10) step = 0
+    if      (ratio < 0.10)  step = 0
     else if (ratio < 0.325) step = 1
     else if (ratio < 0.55)  step = 2
     else if (ratio < 0.775) step = 3
@@ -425,89 +392,25 @@ revealItems.forEach((item) => revealObserver.observe(item))
   }
 
   window.addEventListener('scroll', handleScroll, { passive: true })
-  // Инициализация при загрузке
+  activateStep(0, true)
   handleScroll()
 
-  /* ────────────────────────────────────────────────────────
-     MOBILE: tap-to-advance
-  ──────────────────────────────────────────────────────── */
-
-  // Добавляем DOM-элементы мобильной навигации динамически
-  // (чтобы не загрязнять десктоп DOM)
-  const injectMobileNav = () => {
-    if (block.querySelector('.paw-mobile-nav')) return  // уже есть
-
-    const nav = document.createElement('div')
-    nav.className = 'paw-mobile-nav'
-    nav.innerHTML = `
-      <button class="paw-mobile-btn paw-mobile-btn--prev" aria-label="Предыдущий шаг" disabled>
-        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.8"
-            stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="paw-mobile-counter">0 / 4</span>
-      <button class="paw-mobile-btn paw-mobile-btn--next" aria-label="Следующий шаг">
-        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-          <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.8"
-            stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    `
-
-    // Вставляем после .paw-content
-    const stage = block.querySelector('.paw-stage')
-    if (stage) stage.appendChild(nav)
-
-    nav.querySelector('.paw-mobile-btn--prev').addEventListener('click', () => {
-      if (currentStep > 0) activateStep(currentStep - 1)
-    })
-    nav.querySelector('.paw-mobile-btn--next').addEventListener('click', () => {
-      if (currentStep < 4) activateStep(currentStep + 1)
-    })
-  }
-
-  // Инициализация с учётом мобиля
-  const init = () => {
-    if (isMobile()) {
-      injectMobileNav()
-      activateStep(0, true)
-    } else {
-      activateStep(0, true)
-    }
-  }
-
-  init()
-
-  // Переинициализация при resize (desktop↔mobile)
-  let lastMobile = isMobile()
   window.addEventListener('resize', () => {
-    const nowMobile = isMobile()
-    if (nowMobile !== lastMobile) {
-      lastMobile = nowMobile
-      if (nowMobile) injectMobileNav()
-      activateStep(currentStep, true)
-    }
-    if (!nowMobile) handleScroll()
+    handleScroll()
   }, { passive: true })
 
   /* ────────────────────────────────────────────────────────
-     Dot-клики (desktop + mobile)
+     Dot-клики — прокручиваем к нужной позиции блока
   ──────────────────────────────────────────────────────── */
   block.querySelectorAll('.paw-dot').forEach((dot) => {
     dot.addEventListener('click', () => {
       const step = parseInt(dot.dataset.step, 10)
       if (!isNaN(step)) {
-        activateStep(step)
-
-        // На десктопе: скроллим к соответствующей позиции блока
-        if (!isMobile()) {
-          const ratio = step === 0 ? 0.05 : (step - 1) / TOTAL_STORY_STEPS + 0.15
-          const blockH = block.offsetHeight
-          const vpH    = window.innerHeight
-          const targetY = block.offsetTop + ratio * (blockH - vpH)
-          window.scrollTo({ top: targetY, behavior: 'smooth' })
-        }
+        const ratio = step === 0 ? 0.05 : (step - 1) / TOTAL_STORY_STEPS + 0.15
+        const blockH = block.offsetHeight
+        const vpH    = window.innerHeight
+        const targetY = block.offsetTop + ratio * (blockH - vpH)
+        window.scrollTo({ top: targetY, behavior: 'smooth' })
       }
     })
   })
