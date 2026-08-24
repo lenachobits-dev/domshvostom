@@ -799,7 +799,6 @@ app.get('/', (c) => {
           <div class="pc-postmark" aria-hidden="true">
             <span>Дом с хвостом</span>
             <span>с любовью</span>
-            <span>2026</span>
           </div>
           <p class="pc-lead">
             Пять простых способов быть рядом. Выберите тот, что откликается —
