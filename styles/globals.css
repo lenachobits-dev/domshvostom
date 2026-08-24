@@ -3598,3 +3598,7 @@ a.ft-direct__value:hover { color: var(--ft-accent); }
     font-size: 0.8rem;
   }
 }
+
+@media (min-width: 1920px) {
+  .directions-nav { display: none; }
+}
