@@ -95,13 +95,22 @@ window.scrollTo(0, 0)
     btn.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню')
   })
 
-  /* Закрывать при клике на ссылку */
+  /* Закрывать при клике на ссылку + smooth scroll без хэша в URL */
   nav.querySelectorAll('.site-nav__link').forEach(link => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault()
+      /* Закрываем меню */
       btn.classList.remove('is-open')
       nav.classList.remove('is-open')
       btn.setAttribute('aria-expanded', 'false')
       btn.setAttribute('aria-label', 'Открыть меню')
+      /* Скроллим к секции без изменения URL */
+      const targetId = link.getAttribute('href').replace('#', '')
+      const target = document.getElementById(targetId)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' })
+        /* Не меняем URL — хэш не попадает в историю */
+      }
     })
   })
 

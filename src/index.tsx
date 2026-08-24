@@ -18,8 +18,12 @@ app.get('/', (c) => {
   <meta name="description" content="АНО Дом с Хвостом — центр реабилитации бездомных животных в Уфе." />
   <link rel="icon" type="image/svg+xml" href="/static/paw-logo.svg" />
   <meta property="og:image" content="/static/pc-dog-cards.jpg" />
-  <!-- Отключаем scroll restoration ДО загрузки страницы -->
-  <script>if('scrollRestoration'in history){history.scrollRestoration='manual'}try{window.scrollTo(0,0)}catch(e){}</script>
+  <!-- Отключаем scroll restoration и сбрасываем хэш ДО загрузки страницы -->
+  <script>
+    if('scrollRestoration'in history){history.scrollRestoration='manual'}
+    if(location.hash){history.replaceState(null,'',location.pathname+location.search)}
+    window.scrollTo(0,0)
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Nunito+Sans:wght@400;600&family=Nunito:wght@800&display=swap" rel="stylesheet">
@@ -63,7 +67,7 @@ app.get('/', (c) => {
       </button>
 
       <!-- Кнопка справа -->
-      <a href="#postcard-section" class="site-header__cta" style="text-decoration: none;">Помочь проекту</a>
+      <a href="/donate" class="site-header__cta" style="text-decoration: none;" onclick="event.preventDefault();document.getElementById('postcard-section').scrollIntoView({behavior:'smooth'})">Помочь проекту</a>
     </div>
 
     <!-- Выпадающее навигационное меню -->
@@ -1135,63 +1139,7 @@ app.get('/', (c) => {
       if (e.persisted) { window.scrollTo(0, 0) }
     })
   </script>
-
-  <!-- ДИАГНОСТИКА СКРОЛЛА — удалить после отладки -->
-  <div id="scroll-diag" style="position:fixed;top:0;left:0;right:0;z-index:99999;background:rgba(0,0,0,0.85);color:#fff;font:13px/1.4 monospace;padding:8px 12px;pointer-events:none"></div>
-  <script>
-  (function(){
-    var d = document.getElementById('scroll-diag')
-    if (!d) return
-    var log = []
-
-    // 1. Состояние в момент выполнения скрипта
-    log.push('AT_SCRIPT: scrollY=' + window.scrollY + ' scrollRestoration=' + (history.scrollRestoration||'?'))
-
-    // 2. После DOMContentLoaded
-    document.addEventListener('DOMContentLoaded', function(){
-      log.push('DCL: scrollY=' + window.scrollY)
-      d.innerHTML = log.join('<br>')
-    })
-
-    // 3. После load
-    window.addEventListener('load', function(){
-      log.push('LOAD: scrollY=' + window.scrollY)
-      // Проверяем hash
-      log.push('hash=' + (location.hash||'(none)'))
-      // Проверяем focused element
-      var f = document.activeElement
-      log.push('focus=' + (f ? f.tagName + (f.id?'#'+f.id:'') + (f.className?' .'+f.className.split(' ')[0]:'') : 'none'))
-      d.innerHTML = log.join('<br>')
-    })
-
-    // 4. Через 500ms после load — финальная позиция
-    window.addEventListener('load', function(){
-      setTimeout(function(){
-        log.push('500ms: scrollY=' + window.scrollY)
-        var f = document.activeElement
-        log.push('focus500=' + (f ? f.tagName + (f.id?'#'+f.id:'') : 'none'))
-        d.innerHTML = log.join('<br>')
-      }, 500)
-    })
-
-    // 5. pageshow
-    window.addEventListener('pageshow', function(e){
-      log.push('pageshow: persisted=' + e.persisted + ' scrollY=' + window.scrollY)
-      d.innerHTML = log.join('<br>')
-    })
-
-    // 6. Следим за скроллом первые 2 секунды
-    var scrollEvents = []
-    var trackScroll = function(){ scrollEvents.push(window.scrollY) }
-    window.addEventListener('scroll', trackScroll, {passive:true})
-    setTimeout(function(){
-      window.removeEventListener('scroll', trackScroll)
-      if (scrollEvents.length) log.push('scrolls[0-2s]: ' + scrollEvents.join(','))
-      log.push('FINAL: scrollY=' + window.scrollY)
-      d.innerHTML = log.join('<br>')
-    }, 2000)
-  })()
-  </script>
+</body>
 </body>
 </html>`)
 })
