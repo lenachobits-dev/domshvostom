@@ -3113,7 +3113,7 @@ a.ft-direct__value:hover { color: var(--ft-accent); }
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--pc-accent);
+  color: #B54F45;
 }
 
 .why-help-heading {
