@@ -495,12 +495,13 @@ revealItems.forEach((item) => revealObserver.observe(item))
   const slider = document.getElementById('yuliana-slider')
   if (!slider) return
 
-  const imgEl   = document.getElementById('yuliana-img')
-  const titleEl = document.getElementById('yuliana-title')
-  const quoteEl = document.getElementById('yuliana-quote')
-  const textBox = document.getElementById('yuliana-text')
-  const btnPrev = document.getElementById('yuliana-prev')
-  const btnNext = document.getElementById('yuliana-next')
+  const imgEl      = document.getElementById('yuliana-img')
+  const titleEl    = document.getElementById('yuliana-title')
+  const quoteEl    = document.getElementById('yuliana-quote')
+  const textBox    = document.getElementById('yuliana-text')
+  const btnPrev    = document.getElementById('yuliana-prev')
+  const btnNext    = document.getElementById('yuliana-next')
+  const pawsEl     = slider.querySelector('.yuliana-pawprints')
 
   const slides = [
     {
@@ -529,6 +530,45 @@ revealItems.forEach((item) => revealObserver.observe(item))
     },
   ]
 
+  /* ── Генерация лапок по дуге (порт SC generateArcPaws) ──── */
+  const generateArcPaws = (cx, cy, r, startAngle, endAngle, count, sizeBase = 28, sizeVar = 8) => {
+    const paws = []
+    for (let i = 0; i < count; i++) {
+      const t = count > 1 ? i / (count - 1) : 0.5
+      const angle = startAngle + (endAngle - startAngle) * t
+      const x = cx + r * Math.cos(angle)
+      const y = cy + r * Math.sin(angle)
+      const rotation = angle * (180 / Math.PI) + 90
+      const size = Math.round((sizeBase + Math.sin(i * 1.5) * sizeVar) * 10) / 10
+      paws.push({ left: `${x}%`, top: `${y}%`, rotation, size })
+    }
+    return paws
+  }
+
+  const pawConfigs = [
+    generateArcPaws(78, 18, 40, -0.5 * Math.PI, 0.7 * Math.PI, 4),
+    generateArcPaws(30, 95, 42,  0.6 * Math.PI, 1.6 * Math.PI, 4),
+    generateArcPaws(60,  5, 35,  0,              0.9 * Math.PI, 4),
+    generateArcPaws(88, 55, 42,  0.1 * Math.PI,  1.0 * Math.PI, 4),
+  ]
+
+  /* SVG лапки (порт SC PawPrint) */
+  const pawSVG = (size) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <ellipse cx="12" cy="16" rx="5.5" ry="4.2"/>
+    <ellipse cx="4.8" cy="8.5" rx="2.8" ry="3.5" transform="rotate(-18,4.8,8.5)"/>
+    <ellipse cx="9.8" cy="5.8" rx="2.8" ry="3.8" transform="rotate(-5,9.8,5.8)"/>
+    <ellipse cx="14.2" cy="5.8" rx="2.8" ry="3.8" transform="rotate(5,14.2,5.8)"/>
+    <ellipse cx="19.2" cy="8.5" rx="2.8" ry="3.5" transform="rotate(18,19.2,8.5)"/>
+  </svg>`
+
+  const renderPaws = (idx) => {
+    if (!pawsEl) return
+    const config = pawConfigs[idx] || []
+    pawsEl.innerHTML = config.map(p =>
+      `<span class="yuliana-paw" style="left:${p.left};top:${p.top};transform:rotate(${p.rotation}deg)">${pawSVG(p.size)}</span>`
+    ).join('')
+  }
+
   let current = 0
   let timer = null
 
@@ -538,6 +578,7 @@ revealItems.forEach((item) => revealObserver.observe(item))
     if (imgEl)   { imgEl.src = s.img; imgEl.alt = s.alt }
     if (titleEl) titleEl.textContent = s.title
     if (quoteEl) quoteEl.textContent = s.quote
+    renderPaws(current)
     // Перезапуск анимации
     if (textBox) {
       textBox.style.animation = 'none'
@@ -554,5 +595,7 @@ revealItems.forEach((item) => revealObserver.observe(item))
   if (btnPrev) btnPrev.addEventListener('click', () => { setSlide(current - 1); startTimer() })
   if (btnNext) btnNext.addEventListener('click', () => { setSlide(current + 1); startTimer() })
 
+  // Инициализация — рендерим лапки для первого слайда
+  renderPaws(0)
   startTimer()
 })()
