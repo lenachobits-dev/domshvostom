@@ -60,7 +60,7 @@ app.get('/', (c) => {
       </button>
 
       <!-- Кнопка справа -->
-      <a href="#postcard-section" class="site-header__cta">Помочь проекту</a>
+      <a href="#postcard-section" class="site-header__cta" style="text-decoration: none;">Помочь проекту</a>
     </div>
 
     <!-- Выпадающее навигационное меню -->
@@ -971,7 +971,7 @@ app.get('/', (c) => {
         <div class="yuliana-slider" id="yuliana-slider">
           <div class="yuliana-slider__visual">
             <figure class="yuliana-slider__figure">
-              <img id="yuliana-img" src="/assets/vtroem.jpg" alt="Юлиана с командой"
+              <img id="yuliana-img" src="/assets/lapka.jpg" alt="Лапка собаки"
                 class="yuliana-slider__img" loading="lazy" decoding="async" />
             </figure>
             <nav class="yuliana-slider__nav">
