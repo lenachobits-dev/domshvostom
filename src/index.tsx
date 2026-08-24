@@ -1005,6 +1005,7 @@ app.get('/', (c) => {
   </main>
 
   <!-- ═══════════════ SITE FOOTER ═══════════════ -->
+  <div id="acquainted-section" aria-hidden="true"></div>
   <footer class="site-footer" id="contacts">
     <div class="footer-inner">
 
