@@ -13,6 +13,7 @@ app.get('/', (c) => {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
   <title>Дом с Хвостом</title>
   <meta name="description" content="АНО Дом с Хвостом — центр реабилитации бездомных животных в Уфе." />
   <link rel="icon" type="image/svg+xml" href="/static/paw-logo.svg" />
@@ -877,7 +878,7 @@ app.get('/', (c) => {
               </span>
             </a>
             <div class="pc-hero-build__progress">
-              Собрано <b>476 000 ₽</b> из 50 000 000 ₽
+              <span class="pc-hero-build__raised">Собрано <b>476&#x202F;000&#x202F;₽</b><br>из <span class="pc-hero-build__goal">50&#x202F;000&#x202F;000&#x202F;₽</span></span>
               <div class="pc-hero-build__bar"><i style="width:0.95%"></i></div>
             </div>
           </div>

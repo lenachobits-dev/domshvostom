@@ -1945,6 +1945,23 @@ body {
   font-size: 13px;
   color: #FBEDDA;
 }
+/* Защита от auto-link detection на iOS Safari —
+   числа вроде «50 000 000» распознаются как телефон */
+.pc-hero-build__raised,
+.pc-hero-build__goal {
+  color: #FBEDDA;
+  text-decoration: none;
+  -webkit-text-decoration: none;
+  pointer-events: none;
+}
+/* Перехватываем синий стиль если браузер всё равно обернул в <a> */
+.pc-hero-build__progress a,
+.pc-hero-build__raised a,
+.pc-hero-build__goal a {
+  color: inherit !important;
+  text-decoration: none !important;
+  pointer-events: none;
+}
 .pc-hero-build__bar {
   height: 6px;
   background: rgba(251,245,234,.28);
