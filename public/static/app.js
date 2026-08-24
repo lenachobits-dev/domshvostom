@@ -1,48 +1,59 @@
 /* ═══════════════════════════════════════════════════════════
-   HERO VIDEO — мобильный src-swap
+   HERO VIDEO — мобильный src-swap + надёжный autoplay
    ─────────────────────────────────────────────────────────
-   <video><source media="..."> НЕ работает в HTML5 (в отличие
-   от <picture>). Браузер всегда берёт первый подходящий тип,
-   игнорируя media-атрибут. Поэтому src выбираем через JS:
-   • ≤ 768px → hero-bg-mobile.mp4 (1.5 MB, H.264 Baseline)
-   • > 768px → hero-bg.mp4        (22 MB, полное качество)
-   Загрузка запускается сразу через video.load() чтобы
-   autoplay сработал без лишней задержки.
+   Стратегия:
+   1. В HTML один <source> с desktop-src (дефолт)
+   2. На мобиле (<= 768px) JS меняет src на mobile-файл
+      и вызывает video.load() — без этого браузер не
+      подхватит новый src
+   3. После load() явно вызываем play() — Safari на iOS
+      требует явного вызова даже при muted+autoplay
+   4. Fallback на touchstart — на случай если политика
+      браузера заблокировала autoplay
    ═══════════════════════════════════════════════════════════ */
 ;(function () {
   const video = document.getElementById('hero-video')
   const src   = document.getElementById('hero-video-src')
   if (!video || !src) return
 
-  /* Выбираем файл по ширине viewport */
   const isMobileViewport = window.matchMedia('(max-width: 768px)').matches
-  const targetSrc = isMobileViewport
-    ? '/static/hero-bg-mobile.mp4'
-    : '/static/hero-bg.mp4'
 
-  /* Меняем src только если нужно (дефолт в HTML — desktop) */
-  if (isMobileViewport) {
-    src.setAttribute('src', targetSrc)
-    video.load()   /* обязательно после смены src */
-  }
-
-  /* Fallback: если autoplay заблокирован (редко на мобиле с muted),
-     пробуем play() после первого касания */
-  video.addEventListener('canplay', () => {
+  /* Функция попытки воспроизведения с fallback */
+  function tryPlay () {
     const p = video.play()
     if (p && typeof p.then === 'function') {
-      p.catch(() => {
-        /* Autoplay заблокирован — ждём взаимодействия пользователя */
-        const tryPlay = () => {
-          video.play().catch(() => {})
-          document.removeEventListener('touchstart', tryPlay)
-          document.removeEventListener('click', tryPlay)
+      p.catch(function () {
+        /* Autoplay заблокирован — ждём первого касания */
+        function onTouch () {
+          video.play().catch(function () {})
         }
-        document.addEventListener('touchstart', tryPlay, { once: true })
-        document.addEventListener('click',      tryPlay, { once: true })
+        document.addEventListener('touchstart', onTouch, { once: true })
+        document.addEventListener('click',      onTouch, { once: true })
       })
     }
-  }, { once: true })
+  }
+
+  if (isMobileViewport) {
+    /* Меняем src на мобильный файл (1.1 MB, isom/mp41, H.264 Baseline 3.0) */
+    src.setAttribute('src', '/static/hero-bg-mobile.mp4')
+    /* load() сбрасывает состояние и начинает загрузку нового src */
+    video.load()
+    /* canplaythrough — файл достаточно загружен для непрерывного воспроизведения.
+       Используем addEventListener без once чтобы поймать даже если он стреляет
+       повторно (Safari quirk) */
+    video.addEventListener('canplaythrough', function handler () {
+      video.removeEventListener('canplaythrough', handler)
+      tryPlay()
+    })
+    /* Дополнительно: если canplaythrough не стреляет, пробуем через loadeddata */
+    video.addEventListener('loadeddata', function handler () {
+      video.removeEventListener('loadeddata', handler)
+      tryPlay()
+    })
+  } else {
+    /* Desktop: файл уже прописан в HTML, просто запускаем */
+    tryPlay()
+  }
 })()
 
 /* ═══════════════════════════════════════════════════════════

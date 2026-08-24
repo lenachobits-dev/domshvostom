@@ -9,3 +9,5 @@ logs/
 .DS_Store
 
 # --- merged from SourceCraft ---
+*.bak
+*.mp4.bak
