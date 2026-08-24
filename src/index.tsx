@@ -847,7 +847,7 @@ app.get('/', (c) => {
         <article class="pc-card pc-card--partner">
           <span class="pc-tape pc-tape--right" aria-hidden="true"></span>
           <span class="pc-pin pc-pin--sage pc-pin--tl" aria-hidden="true"></span>
-          <span class="pc-sticky pc-sticky--partner" aria-hidden="true">вместе ×</span>
+
           <div class="pc-card__layout">
             <div class="pc-card__img pc-card__img--wide">
               <img src="/static/pc-meksikancy.jpg" alt="Три мексиканские голые собаки рядом с подарками для приюта" loading="lazy" decoding="async"/>
