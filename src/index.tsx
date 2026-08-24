@@ -78,16 +78,16 @@ app.get('/', (c) => {
   </header>
 
   <main id="main-content">
-    <section id="hero-section" class="hero-block reveal-up">
-      <video class="hero-video"
+    <section id="hero-section" class="hero-block">
+      <video id="hero-video" class="hero-video"
         autoplay muted loop playsinline webkit-playsinline
-        preload="auto"
+        preload="metadata"
         poster="/static/hero-poster.jpg"
         aria-hidden="true"
         disableRemotePlayback
         x-webkit-airplay="deny">
-        <source src="/static/hero-bg-mobile.mp4" type="video/mp4" media="(max-width: 768px)" />
-        <source src="/static/hero-bg.mp4" type="video/mp4" />
+        {/* src задаётся через JS в app.js чтобы мобиль получал лёгкий файл */}
+        <source id="hero-video-src" src="/static/hero-bg.mp4" type="video/mp4" />
       </video>
       <div class="hero-overlay"></div>
 

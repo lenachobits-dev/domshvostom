@@ -30,6 +30,9 @@ body {
   align-items: flex-end;
   overflow: hidden;
   isolation: isolate;
+  /* Hero всегда виден — не участвует в reveal-up анимации */
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .hero-video {
@@ -232,6 +235,17 @@ body {
   /* Контент сидит в нижней половине — видео дышит сверху */
   .hero-block {
     align-items: flex-end;
+  }
+
+  /* Гарантия: видео всегда показывается и заполняет блок */
+  .hero-video {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: center center;
   }
 
   .hero-content {
