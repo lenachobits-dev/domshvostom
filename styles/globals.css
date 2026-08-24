@@ -3310,6 +3310,14 @@ a.ft-direct__value:hover { color: var(--ft-accent); }
   .founder-visual { margin: 0 0 2.5rem; }
   .founder-collage { height: clamp(280px, 55vw, 420px); }
   .founder-paragraph { max-width: 100%; }
+
+  /* Центрируем лица на мобиле — object-position по координатам лица */
+  /* founder-stage.jpg: лицо ~31% слева, ~15% сверху */
+  .founder-collage__item--a img { object-position: 31% 15%; }
+  /* founder-tenderness.jpg: лицо ~68% слева, ~19% сверху */
+  .founder-collage__item--b img { object-position: 68% 19%; }
+  /* founder-smile.jpg: лицо ~55% слева, ~28% сверху */
+  .founder-collage__item--c img { object-position: 55% 28%; }
 }
 
 /* ═══════════════════════════════════════════════════════════
