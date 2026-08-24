@@ -18,6 +18,8 @@ app.get('/', (c) => {
   <meta name="description" content="АНО Дом с Хвостом — центр реабилитации бездомных животных в Уфе." />
   <link rel="icon" type="image/svg+xml" href="/static/paw-logo.svg" />
   <meta property="og:image" content="/static/pc-dog-cards.jpg" />
+  <!-- Отключаем scroll restoration ДО загрузки страницы -->
+  <script>if('scrollRestoration'in history){history.scrollRestoration='manual'}try{window.scrollTo(0,0)}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Nunito+Sans:wght@400;600&family=Nunito:wght@800&display=swap" rel="stylesheet">
@@ -1127,6 +1129,12 @@ app.get('/', (c) => {
   </footer>
 
   <script src="/static/app.js" defer></script>
+  <!-- pageshow — срабатывает при восстановлении из bfcache (Safari) -->
+  <script>
+    window.addEventListener('pageshow', function(e) {
+      if (e.persisted) { window.scrollTo(0, 0) }
+    })
+  </script>
 </body>
 </html>`)
 })
